@@ -1,0 +1,1727 @@
+<!DOCTYPE html>
+<html lang="pl" data-theme="dark" data-lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wąsik Legal | Marcin Wąsik</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --gold: #b89a5a;
+  --gold-light: #d4bc85;
+  --gold-dim: rgba(184,154,90,0.18);
+
+  --bg: #111110;
+  --bg2: #1c1b19;
+  --bg3: #242320;
+  --ink: #f0ece4;
+  --ink2: #c8c4bc;
+  --muted: #888480;
+  --border: #333230;
+  --hero-bg: #0d0c0b;
+  --hero-fg: #f0ece4;
+  --nav-bg: rgba(17,17,16,0.94);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+  transition: background .35s, color .35s;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.2rem 4rem;
+  background: var(--nav-bg);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  transition: background .35s, border-color .35s;
+  animation: fadeDown .8s ease both;
+}
+.nav-logo { display:flex; align-items:center; gap:.7rem; font-family:'Cormorant Garamond',serif; font-size:1.05rem; font-weight:400; letter-spacing:.16em; text-transform:uppercase; color:var(--ink); text-decoration:none; }
+.nav-logo span { color: var(--gold); }
+
+.nav-controls { display: flex; gap: .6rem; align-items: center; }
+
+/* Language toggle */
+.lang-toggle {
+  display: flex;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  transition: border-color .35s;
+}
+.lang-btn {
+  background: transparent;
+  border: none;
+  padding: .38rem .75rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: .62rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  cursor: pointer;
+  transition: background .25s, color .25s;
+}
+.lang-btn.active {
+  background: var(--gold);
+  color: #fff;
+}
+
+
+/* ── HERO ── */
+#hero {
+  min-height: 100vh;
+  display: grid;
+  background: var(--hero-bg);
+  position: relative;
+  overflow: hidden;
+}
+#hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 79px,
+    rgba(255,255,255,.025) 79px,
+    rgba(255,255,255,.025) 80px
+  );
+  pointer-events: none;
+}
+.hero-left {
+  padding: 10rem 5rem 6rem 6rem;
+  display: flex; flex-direction: column; justify-content: center;
+  position: relative;
+  animation: fadeLeft 1s .3s ease both;
+}
+.hero-eyebrow {
+  font-size: .65rem;
+  letter-spacing: .32em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 2rem;
+  display: flex; align-items: center; gap: 1rem;
+}
+.hero-eyebrow::before {
+  content: ''; display: block;
+  width: 2rem; height: 1px; background: var(--gold);
+}
+.hero-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3rem, 5.5vw, 5rem);
+  font-weight: 300;
+  line-height: 1.05;
+  color: var(--hero-fg);
+  margin-bottom: .5rem;
+  letter-spacing: -.01em;
+}
+.hero-name em { font-style: italic; color: var(--gold-light); display: block; }
+.hero-title-tag {
+  font-size: .72rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgba(245,242,236,.45);
+  margin-bottom: 2.5rem;
+  margin-top: .8rem;
+}
+.hero-desc {
+  font-size: .82rem;
+  color: rgba(245,242,236,.52);
+  max-width: 52ch;
+  line-height: 1.9;
+  margin-bottom: 3rem;
+}
+.hero-desc br + br { display: block; content: ''; margin-top: .8rem; }
+.hero-cta {
+  display: inline-flex; align-items: center; gap: 1rem;
+  text-decoration: none;
+  font-size: .7rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid var(--gold);
+  padding: .9rem 2.4rem;
+  transition: background .25s, color .25s;
+  width: fit-content;
+}
+.hero-cta:hover { background: var(--gold); color: #1a1714; }
+
+
+/* ── SECTION BASE ── */
+section { padding: 7rem 6rem; }
+.s-label {
+  font-size: .62rem;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: .8rem;
+}
+.s-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  font-weight: 300;
+  line-height: 1.15;
+  margin-bottom: 1rem;
+  color: var(--ink);
+  transition: color .35s;
+}
+.s-rule { width: 3rem; height: 1px; background: var(--gold); margin-bottom: 3rem; }
+
+/* ── ABOUT ── */
+#about {
+  background: var(--bg2);
+  transition: background .35s;
+}
+.about-text p {
+  font-size: .86rem;
+  color: var(--ink2);
+  margin-bottom: 1.1rem;
+  max-width: 54ch;
+  line-height: 1.85;
+  transition: color .35s;
+}
+.about-right { display: flex; flex-direction: column; gap: 2rem; }
+.edu-block { border-left: 2px solid var(--border); padding-left: 2rem; transition: border-color .35s; }
+.edu-block:hover { border-left-color: var(--gold); }
+.edu-year {
+  font-size: .62rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: .3rem;
+}
+.edu-deg {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: var(--ink);
+  transition: color .35s;
+}
+.edu-school {
+  font-size: .76rem;
+  color: var(--muted);
+  transition: color .35s;
+}
+
+/* ── EXPERIENCE ── */
+#experience {
+  background: var(--bg);
+  transition: background .35s;
+}
+.exp-list { display: flex; flex-direction: column; gap: 0; }
+.exp-item {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 3rem;
+  padding: 2.8rem 0;
+  border-bottom: 1px solid var(--border);
+  transition: border-color .35s;
+}
+.exp-item:first-child { border-top: 1px solid var(--border); }
+.exp-meta { padding-top: .15rem; }
+.exp-period {
+  font-size: .65rem;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: .5rem;
+}
+.exp-company {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem;
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1.3;
+  transition: color .35s;
+}
+.exp-role {
+  font-size: .72rem;
+  color: var(--muted);
+  letter-spacing: .06em;
+  margin-top: .3rem;
+  transition: color .35s;
+}
+.exp-desc {
+  font-size: .83rem;
+  color: var(--ink2);
+  line-height: 1.85;
+  transition: color .35s;
+}
+.exp-desc ul { padding-left: 1.2rem; margin-top: .6rem; }
+.exp-desc li { margin-bottom: .4rem; }
+
+/* ── SERVICES ── */
+#services {
+  background: var(--bg2);
+  transition: background .35s;
+}
+.srv-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  margin-top: 1rem;
+  transition: background .35s, border-color .35s;
+}
+.srv {
+  background: var(--bg2);
+  padding: 3rem 2.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: background .3s;
+}
+.srv::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+  background: var(--gold);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .4s ease;
+}
+.srv:hover { background: var(--bg3); }
+.srv:hover::after { transform: scaleX(1); }
+.srv-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem;
+  color: var(--gold);
+  opacity: .5;
+  margin-bottom: 1.4rem;
+  line-height: 1;
+}
+.srv h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-bottom: .7rem;
+  color: var(--ink);
+  transition: color .35s;
+}
+.srv p { font-size: .77rem; color: var(--muted); line-height: 1.8; transition: color .35s; }
+
+/* ── ACHIEVEMENTS ── */
+#achievements {
+  background: var(--hero-bg);
+  padding: 7rem 6rem;
+}
+.ach-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.06);
+  margin-top: 1rem;
+}
+.ach {
+  background: rgba(255,255,255,.02);
+  padding: 2.5rem 2rem;
+  transition: background .25s;
+}
+.ach:hover { background: rgba(184,154,90,.07); }
+.ach-val {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.2rem;
+  font-weight: 300;
+  color: var(--gold-light);
+  line-height: 1;
+  margin-bottom: .6rem;
+}
+.ach-desc { font-size: .74rem; color: rgba(245,242,236,.45); line-height: 1.6; }
+#achievements .s-title { color: var(--hero-fg); }
+#achievements .s-label { color: var(--gold); }
+
+/* ── CONTACT ── */
+#contact {
+  background: var(--bg);
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 5rem;
+  align-items: start;
+  transition: background .35s;
+}
+#contact > div { min-width: 0; }
+.contact-details { display: flex; flex-direction: column; gap: 1.8rem; }
+.cd { display: flex; flex-direction: column; gap: .3rem; }
+.cd-label {
+  font-size: .6rem;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.cd-val { font-size: .84rem; color: var(--ink2); transition: color .35s; }
+.cd-val a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--border); transition: border-color .25s, color .25s, border-color .35s; }
+.cd-val a:hover { color: var(--gold); border-color: var(--gold); }
+
+/* Form */
+.form { display: flex; flex-direction: column; gap: 1.1rem; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; }
+.fg { display: flex; flex-direction: column; gap: .4rem; }
+.fg label { font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); transition: color .35s; }
+.fg input, .fg textarea, .fg select {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  color: var(--ink);
+  padding: .85rem 1rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: .8rem;
+  font-weight: 300;
+  outline: none;
+  transition: border-color .25s, background .35s, color .35s;
+  resize: none;
+  -webkit-appearance: none;
+}
+.fg input::placeholder, .fg textarea::placeholder { color: var(--muted); opacity: .5; }
+.fg input:focus, .fg textarea:focus, .fg select:focus { border-color: var(--gold); }
+.fg textarea { min-height: 110px; }
+.fg select option { background: var(--bg2); color: var(--ink); }
+.btn-send {
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  padding: .9rem 2.5rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: .68rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background .25s, color .25s;
+  align-self: flex-start;
+}
+.btn-send:hover { background: var(--gold); color: #1a1714; }
+.form-ok { display: none; font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-style: italic; color: var(--gold); padding: 2rem 0; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--hero-bg);
+  padding: 2.2rem 6rem;
+  display: flex; justify-content: space-between; align-items: center;
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+.ft-logo { font-family: 'Cormorant Garamond', serif; font-size: .95rem; letter-spacing: .14em; color: rgba(245,242,236,.35); }
+.ft-copy { font-size: .62rem; letter-spacing: .1em; color: rgba(245,242,236,.2); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeDown  { from{opacity:0;transform:translateY(-18px)} to{opacity:1;transform:none} }
+@keyframes fadeLeft  { from{opacity:0;transform:translateX(-40px)} to{opacity:1;transform:none} }
+@keyframes fadeRight { from{opacity:0;transform:translateX(40px)}  to{opacity:1;transform:none} }
+.reveal { opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease; }
+.reveal.visible { opacity:1; transform:none; }
+
+/* ── I18N VISIBILITY ── */
+[data-lang="pl"] [data-en] { display: none !important; }
+[data-lang="pl"] [data-de] { display: none !important; }
+[data-lang="en"] [data-pl] { display: none !important; }
+[data-lang="en"] [data-de] { display: none !important; }
+[data-lang="de"] [data-pl] { display: none !important; }
+[data-lang="de"] [data-en] { display: none !important; }
+[data-lang="pl"] div[data-en] { display: none !important; }
+[data-lang="pl"] div[data-de] { display: none !important; }
+[data-lang="en"] div[data-pl] { display: none !important; }
+[data-lang="en"] div[data-de] { display: none !important; }
+[data-lang="de"] div[data-pl] { display: none !important; }
+[data-lang="de"] div[data-en] { display: none !important; }
+
+/* ── RESPONSIVE ── */
+@media(max-width:960px) {
+  nav { padding:1.1rem 1.8rem; }
+  #hero { grid-template-columns:1fr; }
+  .hero-left { padding:8rem 2.5rem 4rem; }
+      section { padding:5rem 2rem; }
+  #about, #contact { grid-template-columns:1fr; gap:3rem; }
+  .srv-grid { grid-template-columns:1fr; }
+  .ach-grid { grid-template-columns:1fr 1fr; }
+  .exp-item { grid-template-columns:1fr; gap:.8rem; }
+  .form-row { grid-template-columns:1fr; }
+  footer { flex-direction:column; gap:.8rem; padding:2rem; }
+}
+
+
+
+
+
+/* ── HERO WORDMARK ── */
+.hero-wordmark {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem;
+  font-weight: 400;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: rgba(245,242,236,.35);
+  margin-bottom: 2.5rem;
+}
+.hero-wordmark span { color: var(--gold); }
+
+/* ── BURGER MENU ── */
+.burger-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  width: 36px; height: 36px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  transition: border-color .25s;
+  padding: 0;
+  flex-shrink: 0;
+}
+.burger-btn:hover { border-color: var(--gold); }
+.burger-btn span {
+  display: block;
+  width: 14px; height: 1px;
+  background: var(--muted);
+  transition: background .25s, transform .3s, opacity .3s;
+  transform-origin: center;
+}
+.burger-btn:hover span { background: var(--gold); }
+.burger-btn.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.burger-btn.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.burger-btn.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+.nav-dropdown {
+  position: fixed;
+  top: 0; right: -280px;
+  width: 260px; height: 100vh;
+  background: var(--bg2);
+  border-left: 1px solid var(--border);
+  z-index: 300;
+  display: flex; flex-direction: column;
+  justify-content: center;
+  padding: 3rem 2.5rem;
+  gap: 0;
+  transition: right .35s cubic-bezier(.4,0,.2,1), background .35s, border-color .35s;
+}
+.nav-dropdown.open { right: 0; }
+.nav-dropdown a {
+  display: block;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: var(--ink2);
+  text-decoration: none;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: .04em;
+  transition: color .2s, border-color .35s, padding-left .2s;
+}
+.nav-dropdown a:last-child { border-bottom: none; }
+.nav-dropdown a:hover { color: var(--gold); padding-left: .5rem; }
+
+.nav-overlay {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.5);
+  z-index: 299;
+  backdrop-filter: blur(2px);
+}
+.nav-overlay.open { display: block; }
+
+/* ── HERO MINI SERVICES ── */
+.hero-mini-srv {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+  margin-bottom: 2.5rem;
+}
+.mini-srv {
+  background: rgba(255,255,255,.02);
+  border: 1px solid rgba(184,154,90,.15);
+  border-radius: 20px;
+  padding: .4rem .9rem;
+  font-size: .63rem;
+  color: rgba(240,236,228,.42);
+  letter-spacing: .04em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  transition: background .2s, color .2s, border-color .2s;
+}
+.mini-srv:hover {
+  background: rgba(184,154,90,.1);
+  color: var(--gold-light);
+  border-color: rgba(184,154,90,.5);
+}
+.mini-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: .8rem;
+  color: var(--gold);
+  opacity: .5;
+  flex-shrink: 0;
+  min-width: 1.2rem;
+  line-height: 1;
+}
+
+/* ── MODAL ── */
+.modal-bg {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,.75); z-index: 500;
+  backdrop-filter: blur(4px);
+  align-items: center; justify-content: center;
+}
+.modal-bg.open { display: flex; }
+.modal {
+  background: var(--bg2); border: 1px solid var(--border);
+  max-width: 560px; width: 90%; padding: 3rem; position: relative;
+  animation: modalIn .25s ease;
+}
+@keyframes modalIn { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:none} }
+.modal-num { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--gold); opacity:.5; margin-bottom:.6rem; }
+.modal-title { font-family: 'Cormorant Garamond', serif; font-size: 1.55rem; font-weight:300; color: var(--ink); margin-bottom: 1.2rem; line-height:1.2; }
+.modal-body { font-size: .84rem; color: var(--ink2); line-height: 1.85; }
+.modal-close {
+  position: absolute; top: 1.2rem; right: 1.2rem;
+  background: transparent; border: 1px solid var(--border);
+  width: 32px; height: 32px; color: var(--muted); font-size: 1.1rem;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: border-color .2s, color .2s;
+}
+.modal-close:hover { border-color: var(--gold); color: var(--gold); }
+
+/* ── SRV HIGHLIGHT ON SCROLL TARGET ── */
+.srv { transition: background .3s, box-shadow .3s; }
+.srv.highlight {
+  background: rgba(184,154,90,.1);
+  box-shadow: inset 2px 0 0 var(--gold);
+}
+
+/* ── PUBLICATIONS ── */
+#publications { background: var(--bg2); }
+.pub-list { display: flex; flex-direction: column; gap: 0; margin-top: 1rem; }
+.pub-item {
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: background .2s;
+}
+.pub-item:first-child { border-top: 1px solid var(--border); }
+.pub-item:hover { background: var(--bg3); }
+.pub-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.4rem 1.8rem;
+  gap: 2rem;
+}
+.pub-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem; font-weight: 400;
+  color: var(--ink); line-height: 1.3;
+  transition: color .2s;
+}
+.pub-item:hover .pub-title { color: var(--gold-light); }
+.pub-arrow {
+  font-size: .7rem; color: var(--gold); opacity: .5;
+  flex-shrink: 0; transition: transform .3s, opacity .2s;
+}
+.pub-item.open .pub-arrow { transform: rotate(90deg); opacity: 1; }
+.pub-body {
+  display: none;
+  padding: 0 1.8rem 1.6rem 1.8rem;
+  font-size: .84rem; color: var(--ink2); line-height: 1.85;
+  max-width: 72ch;
+}
+.pub-body div { display: none; }
+.pub-body div[data-pl], .pub-body div[data-en], .pub-body div[data-de] { display: block; }
+.pub-item.open .pub-body { display: block; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#"><img src="data:image/png;base64,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" alt="Wąsik Legal" style="height:38px;width:auto;display:block;"> Wąsik <span>Legal</span></a>
+
+  <div class="nav-controls">
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btnPL" onclick="setLang('pl')">PL</button>
+      <button class="lang-btn" id="btnEN" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" id="btnDE" onclick="setLang('de')">DE</button>
+    </div>
+    <button class="burger-btn" id="burgerBtn" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- DROPDOWN MENU -->
+<div class="nav-dropdown" id="navDropdown">
+  <a href="#about" onclick="closeMenu()"><span data-pl>O mnie</span><span data-en>About</span><span data-de>Über mich</span></a>
+  <a href="#services" onclick="closeMenu()"><span data-pl>Zakres usług</span><span data-en>Practice areas</span><span data-de>Leistungen</span></a>
+  <a href="#experience" onclick="closeMenu()"><span data-pl>Doświadczenie</span><span data-en>Experience</span><span data-de>Erfahrung</span></a>
+  <a href="#contact" onclick="closeMenu()"><span data-pl>Kontakt</span><span data-en>Contact</span><span data-de>Kontakt</span></a>
+  <a href="#publications" onclick="closeMenu()"><span data-pl>Publikacje</span><span data-en>Publications</span><span data-de>Publikationen</span></a>
+</div>
+<div class="nav-overlay" id="navOverlay" onclick="closeMenu()"></div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow"><span data-pl>Radca Prawny</span><span data-en>Attorney-at-law</span><span data-de>Rechtsanwalt</span></p>
+    <h1 class="hero-name">Marcin<em>Wąsik</em></h1>
+    <p class="hero-title-tag"><span data-pl>Head of Legal &amp; Compliance · LL.M. in International Commercial Law</span><span data-en>Head of Legal &amp; Compliance · LL.M. in International Commercial Law</span></p>
+    <div class="hero-mini-srv">
+      <div class="mini-srv" onclick="scrollToService(1)"><span class="mini-num">01</span><span data-pl>FinTech i regulacje finansowe</span><span data-en>FinTech and Financial Services Regulation</span><span data-de>FinTech und Finanzmarktregulierung</span></div>
+      <div class="mini-srv" onclick="scrollToService(2)"><span class="mini-num">02</span><span data-pl>Prawne wsparcie produktowe</span><span data-en>Product Legal Support</span><span data-de>Rechtliche Produktunterstützung</span></div>
+      <div class="mini-srv" onclick="scrollToService(3)"><span class="mini-num">03</span><span data-pl>RODO i ochrona danych osobowych</span><span data-en>GDPR Implementation and Data Protection</span><span data-de>DSGVO und Datenschutz</span></div>
+      <div class="mini-srv" onclick="scrollToService(4)"><span class="mini-num">04</span><span data-pl>Umowy handlowe i dokumentacja kontraktowa</span><span data-en>Commercial Contracts and Customer Documentation</span><span data-de>Handelsverträge und Vertragsdokumentation</span></div>
+      <div class="mini-srv" onclick="scrollToService(5)"><span class="mini-num">05</span><span data-pl>Monitoring regulacyjny i analiza ryzyk</span><span data-en>Regulatory Monitoring and Legal Risk Analysis</span><span data-de>Regulatorisches Monitoring und Risikoanalyse</span></div>
+      <div class="mini-srv" onclick="scrollToService(6)"><span class="mini-num">06</span><span data-pl>Compliance korporacyjny i regulacyjny</span><span data-en>Corporate and Regulatory Compliance</span><span data-de>Korporative und regulatorische Compliance</span></div>
+      <div class="mini-srv" onclick="scrollToService(7)"><span class="mini-num">07</span><span data-pl>Doradztwo transgraniczne</span><span data-en>Cross-border Legal Advisory</span><span data-de>Grenzüberschreitende Rechtsberatung</span></div>
+      <div class="mini-srv" onclick="scrollToService(8)"><span class="mini-num">08</span><span data-pl>Bieżące wsparcie prawne biznesu</span><span data-en>Legal Support for Day-to-Day Business</span><span data-de>Laufende rechtliche Unternehmensberatung</span></div>
+      <div class="mini-srv" onclick="scrollToService(9)"><span class="mini-num">09</span><span data-pl>Wsparcie relacji biznesowych</span><span data-en>Stakeholder Management and Business Partnering</span><span data-de>Unterstützung von Geschäftsbeziehungen</span></div>
+      <div class="mini-srv" onclick="scrollToService(10)"><span class="mini-num">10</span><span data-pl>Ład korporacyjny</span><span data-en>Corporate Governance</span><span data-de>Corporate Governance</span></div>
+    </div>
+    <a class="hero-cta" href="#contact">
+      <span data-pl>Umów konsultację →</span>
+      <span data-en>Schedule a consultation →</span>
+      <span data-de>Beratung vereinbaren →</span>
+    </a>
+  </div>
+
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-text reveal">
+    <p class="s-label"><span data-pl>O mnie</span><span data-en>About me</span><span data-de>Über mich</span></p>
+    <h2 class="s-title"><span data-pl>Prawo w służbie strategii biznesowej</span><span data-en>Law at the service of business strategy</span><span data-de>Recht im Dienst der Unternehmensstrategie</span></h2>
+    <div class="s-rule"></div>
+    <p data-de>Rechtsanwalt mit starker unternehmerischer Ausrichtung und umfangreicher Erfahrung im Gesellschafts- und Handelsrecht, M&A, geistigem Eigentum, neuen Technologien sowie der regulatorischen Compliance in mehreren Rechtsordnungen.</p>
+    <p data-de>Als Head of Legal bei einem internationalen Venture Builder verantwortet er die Leitung eines grenzüberschreitenden Rechtsteams sowie die Beratung von Startups in den Bereichen Unternehmensstrukturierung, Fundraising, Corporate Governance, Lizenzierung und laufende Rechtsangelegenheiten auf den Märkten der EU, des Vereinigten Königreichs und der USA.</p>
+    <p data-de>Die Erfahrung umfasst die Leitung von M&A- und Due-Diligence-Projekten, die Verhandlung komplexer Handelsverträge, die Implementierung von DSGVO- und Compliance-Rahmenwerken sowie die Beratung in Streitigkeiten, Rechtsstreitigkeiten und Schiedsverfahren.</p>
+    <p data-de>Die Kanzlei verbindet rechtliche Präzision mit einem praxisorientierten Verständnis von Unternehmensstrategie, Innovation und den Herausforderungen des internationalen Wachstums. Offen für neue Mandate und grenzüberschreitende Zusammenarbeit.</p>
+    <p data-pl>Radca prawny z silnym ukierunkowaniem biznesowym, posiadający szerokie doświadczenie w zakresie prawa spółek i prawa handlowego, transakcji M&amp;A, własności intelektualnej, nowych technologii oraz zgodności regulacyjnej w wielu jurysdykcjach.</p>
+    <p data-en>An attorney-at-law with a strong business focus and extensive experience in corporate and commercial law, M&amp;A, intellectual property, new technologies, and regulatory compliance across multiple jurisdictions.</p>
+    <p data-pl>Jako Head of Legal w międzynarodowym venture builderze odpowiada za kierowanie transgranicznym zespołem prawnym oraz doradztwo dla startupów w zakresie strukturyzowania działalności, procesów fundraisingowych, ładu korporacyjnego, licencjonowania oraz bieżącego wsparcia prawnego na rynkach Unii Europejskiej, Wielkiej Brytanii i Stanów Zjednoczonych. Współpraca z założycielami, inwestorami, regulatorami oraz zarządami spółek wspiera rozwój biznesu w sposób strategiczny i zgodny z obowiązującymi regulacjami.</p>
+    <p data-en>As Head of Legal at an international venture builder, responsible for leading a cross-border legal team and advising startups on corporate structuring, fundraising, governance, licensing, and ongoing legal matters across the EU, UK, and US markets. Close cooperation with founders, investors, regulators, and management teams supports sustainable and compliant business growth.</p>
+    <p data-pl>Doświadczenie obejmuje prowadzenie projektów M&amp;A i procesów due diligence, negocjowanie złożonych umów handlowych, wdrażanie systemów zgodności z RODO oraz doradztwo w sporach, postępowaniach sądowych i arbitrażowych.</p>
+    <p data-en>Experience includes leading M&amp;A and due diligence projects, negotiating complex commercial agreements, implementing GDPR and compliance frameworks, and advising on disputes, litigation, and arbitration.</p>
+    <p data-pl>Praktyka łączy precyzję prawną z praktycznym rozumieniem strategii biznesowej, innowacji oraz wyzwań związanych z rozwojem przedsięwzięć o charakterze międzynarodowym. Otwartość na nowe wyzwania oraz współpracę w środowisku międzynarodowym.</p>
+    <p data-en>The practice combines legal precision with a practical understanding of business strategy, innovation, and the realities of scaling international ventures. Open to new challenges and cross-border cooperation.</p>
+  </div>
+
+  
+</section>
+
+<!-- EXPERIENCE -->
+<section id="services">
+  <div class="reveal">
+    <p class="s-label"><span data-pl>Zakres usług</span><span data-en>Practice areas</span><span data-de>Leistungsbereiche</span></p>
+    <h2 class="s-title"><span data-pl>W czym mogę pomóc</span><span data-en>How I can help</span><span data-de>Wie ich helfen kann</span></h2>
+    <div class="s-rule"></div>
+  </div>
+  <div class="srv-grid reveal">
+    <div class="srv" id="srv-1" onclick="openModal(0)">
+      <div class="srv-num">01</div>
+      <h3><span data-pl>FinTech i regulacje finansowe</span><span data-en>FinTech and Financial Services Regulation</span><span data-de>FinTech und Finanzmarktregulierung</span></h3>
+      <p><span data-pl>Regulacje sektora finansowego, licencje EMI i VASP, płatności cyfrowe, crypto-assets i MiCA. Wsparcie dla innowacyjnych modeli biznesowych w środowisku regulowanym.</span><span data-en>Financial sector regulation, EMI and VASP licensing, digital payments, crypto-assets and MiCA. Support for innovative business models in regulated environments.</span></p>
+    </div>
+    <div class="srv" id="srv-2" onclick="openModal(1)">
+      <div class="srv-num">02</div>
+      <h3><span data-pl>Prawne wsparcie produktowe</span><span data-en>Product Legal Support</span><span data-de>Rechtliche Produktunterstützung</span></h3>
+      <p><span data-pl>Doradztwo prawne na etapie projektowania produktu, weryfikacja modeli biznesowych, ocena ryzyk regulacyjnych i wdrożeniowych dla produktów cyfrowych i finansowych.</span><span data-en>Legal advisory at product design stage, business model review, regulatory and implementation risk assessment for digital and financial products.</span></p>
+    </div>
+    <div class="srv" id="srv-3" onclick="openModal(2)">
+      <div class="srv-num">03</div>
+      <h3><span data-pl>RODO i ochrona danych osobowych</span><span data-en>GDPR Implementation and Data Protection</span><span data-de>DSGVO und Datenschutz</span></h3>
+      <p><span data-pl>Wdrożenia RODO, audyty zgodności, polityki prywatności, rejestry czynności przetwarzania, umowy powierzenia danych, szkolenia i bieżące doradztwo.</span><span data-en>GDPR implementation, compliance audits, privacy policies, processing registers, DPA agreements, training and day-to-day data protection advisory.</span></p>
+    </div>
+    <div class="srv" id="srv-4" onclick="openModal(3)">
+      <div class="srv-num">04</div>
+      <h3><span data-pl>Umowy handlowe i dokumentacja kontraktowa</span><span data-en>Commercial Contracts and Customer Documentation</span><span data-de>Handelsverträge und Vertragsdokumentation</span></h3>
+      <p><span data-pl>Przygotowywanie, negocjowanie i opiniowanie umów handlowych, kontraktów infrastrukturalnych, SLA, regulaminów i dokumentacji B2B oraz B2C.</span><span data-en>Drafting, negotiating and reviewing commercial agreements, infrastructure contracts, SLAs, terms of service and B2B/B2C documentation.</span></p>
+    </div>
+    <div class="srv" id="srv-5" onclick="openModal(4)">
+      <div class="srv-num">05</div>
+      <h3><span data-pl>Monitoring regulacyjny i analiza ryzyk</span><span data-en>Regulatory Monitoring and Legal Risk Analysis</span><span data-de>Regulatorisches Monitoring und Risikoanalyse</span></h3>
+      <p><span data-pl>Śledzenie zmian legislacyjnych i regulacyjnych w UE i na rynkach lokalnych, ocena wpływu na działalność, rekomendacje i wdrożenie dostosowań.</span><span data-en>Tracking legislative and regulatory developments in the EU and local markets, impact assessment, recommendations and implementation of adjustments.</span></p>
+    </div>
+    <div class="srv" id="srv-6" onclick="openModal(5)">
+      <div class="srv-num">06</div>
+      <h3><span data-pl>Compliance korporacyjny i regulacyjny</span><span data-en>Corporate and Regulatory Compliance</span><span data-de>Korporative und regulatorische Compliance</span></h3>
+      <p><span data-pl>Budowa i wdrażanie systemów compliance, polityki AML, procedury wewnętrzne, zarządzanie ryzykiem regulacyjnym i obsługa relacji z regulatorami.</span><span data-en>Building and implementing compliance systems, AML policies, internal procedures, regulatory risk management and regulator relations.</span></p>
+    </div>
+    <div class="srv" id="srv-7" onclick="openModal(6)">
+      <div class="srv-num">07</div>
+      <h3><span data-pl>Doradztwo transgraniczne</span><span data-en>Cross-border Legal Advisory</span><span data-de>Grenzüberschreitende Rechtsberatung</span></h3>
+      <p><span data-pl>Obsługa prawna operacji w wielu jurysdykcjach (PL, EE, LV, LT, BE, LU, UK, US), koordynacja zewnętrznych doradców, strukturyzowanie działalności i ekspansja zagraniczna.</span><span data-en>Legal support for multi-jurisdiction operations (PL, EE, LV, LT, BE, LU, UK, US), coordination of external counsel, business structuring and international expansion.</span></p>
+    </div>
+    <div class="srv" id="srv-8" onclick="openModal(7)">
+      <div class="srv-num">08</div>
+      <h3><span data-pl>Bieżące wsparcie prawne biznesu</span><span data-en>Legal Support for Day-to-Day Business</span><span data-de>Laufende rechtliche Unternehmensberatung</span></h3>
+      <p><span data-pl>Stała obsługa prawna spółek i przedsiębiorców — opinie, umowy, korespondencja, wsparcie operacyjne i szybkie odpowiedzi na bieżące potrzeby prawne.</span><span data-en>Ongoing legal support for companies and entrepreneurs — opinions, contracts, correspondence, operational support and prompt responses to day-to-day legal needs.</span></p>
+    </div>
+    <div class="srv" id="srv-9" onclick="openModal(8)">
+      <div class="srv-num">09</div>
+      <h3><span data-pl>Wsparcie relacji biznesowych</span><span data-en>Stakeholder Management and Business Partnering</span><span data-de>Unterstützung von Geschäftsbeziehungen</span></h3>
+      <p><span data-pl>Doradztwo w relacjach z inwestorami, regulatorami i partnerami biznesowymi. Negocjacje, zarządzanie interesariuszami i budowanie struktur współpracy.</span><span data-en>Advisory on relations with investors, regulators and business partners. Negotiations, stakeholder management and collaboration structure design.</span></p>
+    </div>
+    <div class="srv" id="srv-10" onclick="openModal(9)">
+      <div class="srv-num">10</div>
+      <h3><span data-pl>Ład korporacyjny</span><span data-en>Corporate Governance</span><span data-de>Corporate Governance</span></h3>
+      <p><span data-pl>Organizacja i obsługa organów spółek, umowy wspólników, zmiany struktury kapitałowej, zakładanie i likwidacja podmiotów, corporate housekeeping.</span><span data-en>Organising and supporting company bodies, shareholders' agreements, capital structure changes, incorporation and liquidation, corporate housekeeping.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="reveal">
+    <p class="s-label"><span data-pl>Wybrane osiągnięcia</span><span data-en>Selected achievements</span><span data-de>Ausgewählte Leistungen</span></p>
+    <h2 class="s-title"><span data-pl>Liczby mówią same za siebie</span><span data-en>Results that speak for themselves</span><span data-de>Zahlen sprechen für sich</span></h2>
+    <div class="s-rule"></div>
+  </div>
+  <div class="ach-grid reveal">
+    <div class="ach">
+      <div class="ach-val">16+</div>
+      <div class="ach-desc"><span data-pl>lat doświadczenia zawodowego</span><span data-en>years of professional experience</span><span data-de>Jahre Berufserfahrung</span></div>
+    </div>
+    <div class="ach">
+      <div class="ach-val">200+</div>
+      <div class="ach-desc"><span data-pl>postępowań sądowych i sporów arbitrażowych</span><span data-en>court proceedings and arbitration disputes</span><span data-de>Gerichts- und Schiedsverfahren</span></div>
+    </div>
+    <div class="ach">
+      <div class="ach-val">50M+</div>
+      <div class="ach-desc"><span data-pl>PLN łącznej wartości sporów sądowych</span><span data-en>PLN total value of court disputes</span><span data-de>PLN Gesamtwert der Rechtsstreitigkeiten</span></div>
+    </div>
+    <div class="ach">
+      <div class="ach-val">300M+</div>
+      <div class="ach-desc"><span data-pl>PLN w negocjowanych kontraktach</span><span data-en>PLN in negotiated contracts</span><span data-de>PLN in verhandelten Verträgen</span></div>
+    </div>
+    <div class="ach">
+      <div class="ach-val">10+</div>
+      <div class="ach-desc"><span data-pl>jurysdykcji obsługi transgranicznej</span><span data-en>jurisdictions in cross-border matters</span><span data-de>Rechtssysteme für grenzüberschreitende Mandate</span></div>
+    </div>
+    <div class="ach">
+      <div class="ach-val">20+</div>
+      <div class="ach-desc"><span data-pl>wdrożeń compliance i RODO</span><span data-en>compliance and GDPR implementations</span><span data-de>Compliance- und DSGVO-Implementierungen</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="reveal">
+    <p class="s-label"><span data-pl>Kontakt</span><span data-en>Contact</span><span data-de>Kontakt</span></p>
+    <h2 class="s-title"><span data-pl>Porozmawiajmy o Twojej sprawie</span><span data-en>Let's talk about your matter</span><span data-de>Sprechen wir über Ihr Anliegen</span></h2>
+    <div class="s-rule"></div>
+    <div class="contact-details">
+      <div class="cd">
+        <p class="cd-label">E-mail</p>
+        <p class="cd-val"><a href="/cdn-cgi/l/email-protection#acc182dbcddfc5c7ecdbcddfc5c7c0c9cbcdc082dcc0"><span class="__cf_email__" data-cfemail="97fab9e0f6e4fefcd7e0f6e4fefcfbf2f0f6fbb9e7fb">[email&#160;protected]</span></a></p>
+      </div>
+<div class="cd">
+        <p class="cd-label">LinkedIn</p>
+        <p class="cd-val"><a href="https://linkedin.com/in/marcin-wasik-536221267" target="_blank">linkedin.com/in/marcin-wasik-536221267</a></p>
+      </div>
+</div>
+  </div>
+
+  <div class="reveal">
+    <form class="form" id="cf" action="https://formspree.io/f/xqeywnbe" method="POST">
+      <div class="form-row">
+        <div class="fg">
+          <label><span data-pl>Imię i nazwisko</span><span data-en>Full name</span><span data-de>Vor- und Nachname</span></label>
+          <input type="text" name="name" required>
+        </div>
+        <div class="fg">
+          <label><span data-pl>Telefon</span><span data-en>Phone</span><span data-de>Telefon</span></label>
+          <input type="tel" name="phone">
+        </div>
+      </div>
+      <div class="fg">
+        <label>E-mail</label>
+        <input type="email" name="email" required>
+      </div>
+      <div class="fg">
+        <label><span data-pl>Opis sprawy</span><span data-en>Brief description</span><span data-de>Kurze Beschreibung</span></label>
+        <textarea name="message"></textarea>
+      </div>
+      <button class="btn-send" type="submit">
+        <span data-pl>Wyślij wiadomość</span><span data-en>Send message</span><span data-de>Nachricht senden</span>
+      </button>
+    </form>
+    <div class="form-ok" id="fok">
+      <span data-pl>Dziękuję za wiadomość — odezwę się w ciągu 24 godzin.</span>
+      <span data-en>Thank you — I will be in touch within 24 hours.</span>
+      <span data-de>Vielen Dank — ich melde mich innerhalb von 24 Stunden.</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- MODAL -->
+<div class="modal-bg" id="modalBg" onclick="closeModal(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-num" id="modalNum"></div>
+    <div class="modal-title" id="modalTitle"></div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+
+<!-- PUBLICATIONS -->
+<section id="publications">
+  <div class="reveal">
+    <p class="s-label"><span data-pl>Publikacje</span><span data-en>Publications</span><span data-de>Publikationen</span></p>
+    <h2 class="s-title"><span data-pl>Artykuły i opracowania</span><span data-en>Articles and papers</span><span data-de>Artikel und Abhandlungen</span></h2>
+    <div class="s-rule"></div>
+  </div>
+  <div class="pub-list reveal" id="pubList">
+    <div class="pub-item" onclick="togglePub(this)">
+      <div class="pub-header">
+        <div class="pub-title"><span data-pl>AI a przyszłość gospodarki wiedzy</span><span data-en>AI and the Future of the Knowledge Economy</span><span data-de>KI und die Zukunft der Wissensökonomie</span></div>
+        <span class="pub-arrow">›</span>
+      </div>
+      <div class="pub-body">
+        <div data-pl>**Co dzieje się z gospodarką wiedzy, gdy inteligencja przestaje być
+dobrem rzadkim?**<br><br>Przez dekady przewaga konkurencyjna opierała się na trzech filarach:
+kapitale, dostępie do informacji oraz wysokospecjalistycznej pracy
+intelektualnej. Rozwój sztucznej inteligencji wprost wpływa na ten
+trzeci obszar. Jeżeli analiza, synteza, research, modelowanie i
+tworzenie treści stają się tanie, szybkie i skalowalne, zmienia się
+ekonomika zawodów opartych na wiedzy.<br><br>Nie oznacza to zaniku profesji eksperckich. Oznacza jednak przesunięcie
+wartości. Sama wiedza przestaje być produktem o wysokiej marży. Coraz
+większego znaczenia nabierają odpowiedzialność, reputacja, umiejętność
+podejmowania decyzji w warunkach niepewności oraz zdolność do realnego
+zarządzania ryzykiem. Innymi słowy, rośnie znaczenie tych, którzy nie
+tylko „wytwarzają treść", lecz potrafią wziąć odpowiedzialność za jej
+skutki.<br><br>Z perspektywy kancelarii prawnej jest to zmiana fundamentalna. Im
+szybciej technologia przyspiesza obieg informacji i decyzji, tym większą
+wartość mają ci, którzy potrafią zaprojektować bezpieczne ramy
+działania, właściwie przypisać odpowiedzialność oraz przełożyć złożoność
+regulacyjną na praktyczne decyzje biznesowe. W gospodarce, w której
+inteligencja staje się powszechna, przewaga nie wynika już wyłącznie z
+dostępu do wiedzy, lecz z jakości osądu.</div>
+        <div data-en>**What happens to the knowledge economy when intelligence is no longer
+scarce?**<br><br>For decades, competitive advantage rested on three core pillars:
+capital, access to information, and high-skill cognitive labour.
+Artificial intelligence directly affects the third of these. If
+analysis, synthesis, research, modelling and drafting become cheap, fast
+and scalable, the economics of knowledge-based professions inevitably
+change.<br><br>This does not mean expert professions will disappear. It does mean,
+however, that value is shifting. Knowledge alone is losing its premium
+as a standalone product. Accountability, reputation, judgment under
+uncertainty, and the ability to manage risk are becoming far more
+important. In other words, the market increasingly rewards not those who
+merely produce content, but those who can stand behind it.<br><br>From a legal advisory perspective, this shift is profound. The faster
+technology accelerates the flow of information and decision-making, the
+more valuable become professionals who can design safe frameworks,
+allocate responsibility properly, and translate regulatory complexity
+into workable business decisions. In an economy where intelligence
+becomes abundant, true advantage lies less in access to knowledge and
+more in the quality of judgment.</div>
+        <div data-de>**Was geschieht mit der Wissensökonomie, wenn Intelligenz kein knappes
+Gut mehr ist?**<br><br>Über Jahrzehnte beruhte wirtschaftlicher Vorsprung auf drei wesentlichen
+Säulen: Kapital, Zugang zu Informationen und hochqualifizierter
+kognitiver Arbeit. Künstliche Intelligenz greift unmittelbar in die
+dritte dieser Säulen ein. Wenn Analyse, Synthese, Recherche,
+Modellierung und Texterstellung günstig, schnell und skalierbar werden,
+verändert sich zwangsläufig die Ökonomie wissensbasierter Berufe.<br><br>Das bedeutet nicht, dass Expertenberufe verschwinden. Es bedeutet aber,
+dass sich der Schwerpunkt des wirtschaftlichen Werts verlagert. Wissen
+als solches verliert an Exklusivität. An Bedeutung gewinnen
+Verantwortung, Reputation, Urteilsvermögen unter Unsicherheit und die
+Fähigkeit, Risiken tatsächlich zu steuern. Der Markt belohnt damit
+zunehmend nicht diejenigen, die nur Inhalte erzeugen, sondern
+diejenigen, die für deren Folgen einstehen können.<br><br>Aus Sicht der Rechtsberatung ist das eine grundlegende Veränderung. Je
+stärker Technologie Informations- und Entscheidungsprozesse
+beschleunigt, desto wertvoller werden diejenigen, die rechtssichere
+Strukturen entwickeln, Verantwortung sauber zuordnen und regulatorische
+Komplexität in praktikable geschäftliche Entscheidungen übersetzen
+können. In einer Wirtschaft, in der Intelligenz allgegenwärtig wird,
+beruht der eigentliche Vorsprung nicht mehr allein auf Wissen, sondern
+auf der Qualität des Urteils.</div>
+      </div>
+    </div>
+    <div class="pub-item" onclick="togglePub(this)">
+      <div class="pub-header">
+        <div class="pub-title"><span data-pl>Prompty AI jako potencjalny materiał dowodowy</span><span data-en>AI Prompts as Potential Evidence</span><span data-de>KI-Prompts als potenzielles Beweismittel</span></div>
+        <span class="pub-arrow">›</span>
+      </div>
+      <div class="pub-body">
+        <div data-pl>**Czy rozmowy z AI są prywatne? Lekcja płynąca z amerykańskiego
+discovery**<br><br>Spór pomiędzy „The New York Times" a OpenAI pokazał coś, o czym wiele
+firm nadal nie myśli wystarczająco poważnie: interakcje z narzędziami AI
+mogą w określonych warunkach stać się przedmiotem szerokiego
+postępowania dowodowego. W praktyce oznacza to, że prompty i
+wygenerowane odpowiedzi nie zawsze powinny być traktowane jak prywatna
+notatka, lecz raczej jak rekord biznesowy powierzony zewnętrznemu
+dostawcy technologii.<br><br>Z perspektywy przedsiębiorców działających w Europie to szczególnie
+istotne. Nawet jeśli firma funkcjonuje wyłącznie na rynku unijnym,
+związek z podmiotem podlegającym jurysdykcji amerykańskiej może
+pośrednio otwierać drogę do obowiązków dowodowych o bardzo szerokim
+zakresie. Deidentyfikacja danych zmniejsza ryzyko, ale go nie eliminuje,
+zwłaszcza gdy sama treść promptów ujawnia kontekst biznesowy, dane
+wrażliwe albo tajemnicę przedsiębiorstwa.<br><br>W praktyce warto wdrożyć jasne zasady higieny promptów, klasyfikacji
+danych oraz korzystania wyłącznie z rozwiązań o odpowiednim standardzie
+kontraktowym i compliance. Z prawnego punktu widzenia korzystanie z AI
+przestaje być wyłącznie zagadnieniem efektywności. Coraz częściej jest
+to kwestia zarządzania ryzykiem dowodowym, poufnością i bezpieczeństwem
+informacji.</div>
+        <div data-en>**Are AI conversations really private? A lesson from US discovery
+rules**<br><br>The dispute between *The New York Times* and OpenAI illustrates a point
+that many businesses still underestimate: interactions with AI tools
+may, in certain circumstances, become part of broad evidence-gathering
+processes. In practice, prompts and model outputs should not always be
+treated as private notes. They may instead resemble business records
+entrusted to an external technology provider.<br><br>This is particularly relevant from a European business perspective. Even
+if a company operates primarily within the EU, a meaningful connection
+to a US-based provider may indirectly expose it to far-reaching
+litigation and disclosure risks. De-identification reduces risk, but it
+does not eliminate it, especially where the substance of the prompt
+itself reveals sensitive business context, confidential information, or
+personal data.<br><br>As a matter of good governance, organisations should adopt clear prompt
+hygiene rules, data-classification standards, and enterprise-grade AI
+usage policies supported by appropriate contractual safeguards. Legally,
+the use of AI is no longer only a productivity issue. Increasingly, it
+is also a matter of evidence management, confidentiality, and
+information-risk control.</div>
+        <div data-de>**Sind Gespräche mit KI wirklich privat? Eine Lehre aus dem
+US-amerikanischen Discovery-Verfahren**<br><br>Der Rechtsstreit zwischen der *New York Times* und OpenAI macht
+deutlich, was viele Unternehmen noch immer unterschätzen: Interaktionen
+mit KI-Systemen können unter bestimmten Umständen Gegenstand
+weitreichender Beweisverfahren werden. Prompts und KI-Ausgaben sollten
+daher nicht ohne Weiteres als private Notizen verstanden werden, sondern
+eher als geschäftliche Aufzeichnungen, die einem externen
+Technologieanbieter anvertraut werden.<br><br>Aus europäischer Unternehmenssicht ist das besonders relevant. Selbst
+wenn ein Unternehmen im Alltag ausschließlich in der EU tätig ist, kann
+die Nutzung eines US-basierten Anbieters mittelbar zu weitreichenden
+Offenlegungs- und Beweisrisiken führen. Eine De-Identifizierung von
+Daten reduziert diese Risiken zwar, beseitigt sie jedoch nicht
+vollständig -- insbesondere dann nicht, wenn der Inhalt des Prompts
+selbst vertrauliche geschäftliche Zusammenhänge, personenbezogene Daten
+oder Geschäftsgeheimnisse offenlegt.<br><br>Aus rechtlicher Sicht empfiehlt sich daher ein klares Governance-Modell:
+verbindliche Regeln zur Prompt-Hygiene, Datenklassifizierung sowie der
+Einsatz von Enterprise-Lösungen mit geeigneten vertraglichen und
+Compliance-bezogenen Absicherungen. Die Nutzung von KI ist damit nicht
+mehr nur eine Frage der Effizienz, sondern zunehmend auch des
+Beweisrisikomanagements, der Vertraulichkeit und der
+Informationssicherheit.</div>
+      </div>
+    </div>
+    <div class="pub-item" onclick="togglePub(this)">
+      <div class="pub-header">
+        <div class="pub-title"><span data-pl>Koniec anonimowości w krypto? CARF i nowa era raportowania</span><span data-en>The End of Crypto Anonymity? CARF and the New Era of Reporting</span><span data-de>Das Ende der Krypto-Anonymität? CARF und die neue Ära der Berichterstattung</span></div>
+        <span class="pub-arrow">›</span>
+      </div>
+      <div class="pub-body">
+        <div data-pl>Rynek krypto wchodzi w etap pełnej transparentności podatkowej<br><br>Globalne regulacje dotyczące raportowania aktywów cyfrowych wchodzą w
+nową fazę. OECD Crypto-Asset Reporting Framework (CARF) oznacza w
+praktyce przejście od modelu ograniczonej przejrzystości do systemu
+szerokiej wymiany informacji podatkowych pomiędzy państwami. Dla
+inwestorów i podmiotów operujących na rynku krypto jest to moment
+przełomowy.<br><br>Dostawcy usług związanych z kryptoaktywami będą zobowiązani do
+gromadzenia oraz raportowania rozbudowanych danych dotyczących
+użytkowników, transakcji, wartości zbycia, kosztów nabycia oraz
+rezydencji podatkowej. Od 2027 r. informacje te mają być automatycznie
+wymieniane między państwami uczestniczącymi w systemie. W praktyce
+oznacza to, że założenie o „niewidoczności" transakcji krypto dla
+administracji podatkowych staje się nieaktualne.<br><br>Dla polskich przedsiębiorców, inwestorów i podmiotów z branży oznacza to
+konieczność wcześniejszego uporządkowania procesów compliance,
+dokumentacji podatkowej oraz modeli operacyjnych. Rynek aktywów
+cyfrowych nie funkcjonuje już na obrzeżach systemu. Wchodzi do głównego
+nurtu regulacyjnego, a wraz z tym rośnie znaczenie prawidłowego
+doradztwa w zakresie strukturyzacji, obowiązków raportowych i
+bezpieczeństwa podatkowego.</div>
+        <div data-en>Crypto is entering an era of full tax transparency<br><br>Global regulation of digital-asset reporting is entering a new phase.
+The OECD Crypto-Asset Reporting Framework (CARF) marks a shift from
+limited visibility to broad cross-border tax transparency. For investors
+and businesses operating in the crypto space, this is a turning point.<br><br>Crypto-asset service providers will be required to collect and report
+extensive user and transaction data, including disposal values,
+acquisition costs, realised gains, and tax residency information. From
+2027 onwards, this information is expected to be exchanged automatically
+between participating jurisdictions. In practical terms, the
+long-standing assumption that crypto activity remains largely outside
+effective tax oversight is rapidly becoming outdated.<br><br>For Polish businesses, investors, and market participants, this means
+that compliance, tax documentation, and operational structures should be
+reviewed in advance. Digital assets no longer function at the edge of
+the regulatory system. They are moving into its core. That makes sound
+legal advice on structuring, reporting obligations, and tax-risk
+management increasingly important.</div>
+        <div data-de>**Der Kryptomarkt tritt in eine Phase umfassender steuerlicher
+Transparenz ein**<br><br>Die globale Regulierung der Berichterstattung über digitale
+Vermögenswerte befindet sich in einer neuen Phase. Das OECD Crypto-Asset
+Reporting Framework (CARF) markiert den Übergang von begrenzter
+Transparenz zu einem System weitreichenden internationalen
+Informationsaustauschs im Steuerbereich. Für Investoren und Unternehmen
+im Kryptobereich ist das ein Wendepunkt.<br><br>Dienstleister im Bereich von Krypto-Assets werden verpflichtet sein,
+umfangreiche Daten über Nutzer und Transaktionen zu erheben und zu
+melden, darunter Veräußerungswerte, Anschaffungskosten, realisierte
+Gewinne sowie steuerliche Ansässigkeit. Ab 2027 sollen diese
+Informationen automatisch zwischen den teilnehmenden Staaten
+ausgetauscht werden. Praktisch bedeutet das, dass die Annahme,
+Kryptotransaktionen blieben außerhalb wirksamer steuerlicher Kontrolle,
+zunehmend überholt ist.<br><br>Für polnische Unternehmen, Investoren und Marktteilnehmer bedeutet dies,
+dass Compliance-Strukturen, steuerliche Dokumentation und operative
+Modelle frühzeitig überprüft werden sollten. Digitale Vermögenswerte
+bewegen sich nicht länger am Rand des Regulierungssystems, sondern
+rücken in dessen Zentrum. Damit wächst die Bedeutung fundierter
+Rechtsberatung zu Strukturierung, Meldepflichten und steuerlichem
+Risikomanagement.</div>
+      </div>
+    </div>
+    <div class="pub-item" onclick="togglePub(this)">
+      <div class="pub-header">
+        <div class="pub-title"><span data-pl>Jak zabezpieczyć prawo do modyfikowania utworu</span><span data-en>How to Protect the Right to Modify a Work</span><span data-de>Wie man das Recht zur Werkänderung absichert</span></div>
+        <span class="pub-arrow">›</span>
+      </div>
+      <div class="pub-body">
+        <div data-pl>Samo przeniesienie praw autorskich majątkowych to często za mało<br><br>W praktyce obrotu bardzo często zakłada się, że nabycie autorskich praw
+majątkowych automatycznie daje pełną swobodę w dalszym rozwijaniu,
+przerabianiu i dostosowywaniu utworu. To uproszczenie bywa ryzykowne.
+Polski system prawa autorskiego rozróżnia bowiem prawa majątkowe od
+osobistych, a dodatkowo odrębnie traktuje kwestię korzystania z
+opracowań, czyli tzw. praw zależnych.<br><br>Autorskie prawa osobiste pozostają trwale związane z twórcą i co do
+zasady nie mogą zostać przeniesione. Z kolei twórcza przeróbka utworu
+może prowadzić do powstania opracowania, którego eksploatacja wymaga
+odpowiedniego umownego uregulowania. W praktyce oznacza to, że podmiot
+zamawiający projekt, dokumentację, treści, kod lub identyfikację
+wizualną powinien zadbać nie tylko o przeniesienie autorskich praw
+majątkowych na właściwych polach eksploatacji, lecz również o zgodę na
+wykonywanie praw zależnych oraz odpowiednie postanowienia dotyczące
+niewykonywania praw osobistych względem nabywcy.<br><br>Dobrze skonstruowana umowa daje realną możliwość dalszego rozwoju
+nabytego utworu, jego adaptacji do nowych projektów oraz powierzania
+modyfikacji podmiotom trzecim. Brak takich postanowień może w
+przyszłości poważnie ograniczyć swobodę biznesową. Właśnie dlatego w
+obszarze IP liczy się nie tylko samo „przeniesienie praw", ale przede
+wszystkim precyzyjna architektura kontraktowa.</div>
+        <div data-en>An assignment of economic copyright alone is often not enough<br><br>In commercial practice, it is often assumed that acquiring economic
+copyright automatically grants full freedom to develop, modify, or adapt
+a work. That assumption can be misleading. Under Polish copyright law,
+economic rights, moral rights, and the right to exploit derivative works
+are distinct legal concepts and must be addressed separately.<br><br>Moral rights remain permanently connected to the author and cannot, as a
+rule, be transferred. At the same time, a creative modification of an
+existing work may constitute a derivative work, the use of which
+requires an appropriate contractual basis. In practice, this means that
+a party commissioning software, design, content, documentation, or
+branding should secure not only the assignment of economic rights on the
+relevant fields of exploitation, but also consent to exercise derivative
+rights and properly drafted provisions regarding the non-exercise of
+moral rights vis-à-vis the acquirer.<br><br>A well-structured agreement ensures genuine freedom to further develop
+the work, adapt it for future projects, and commission modifications
+from third parties. Without these clauses, business flexibility may
+later be significantly restricted. In IP matters, therefore, the key
+issue is not only whether rights are assigned, but whether the
+contractual framework has been designed with sufficient precision.</div>
+        <div data-de>**Die Übertragung wirtschaftlicher Urheberrechte allein ist häufig nicht
+ausreichend**<br><br>In der Vertragspraxis wird oft angenommen, dass der Erwerb
+wirtschaftlicher Urheberrechte automatisch die uneingeschränkte Befugnis
+verleiht, ein Werk weiterzuentwickeln, zu verändern oder anzupassen.
+Diese Annahme ist jedoch rechtlich verkürzt. Das polnische Urheberrecht
+unterscheidet zwischen vermögensrechtlichen Befugnissen,
+Urheberpersönlichkeitsrechten und dem Recht zur Nutzung von
+Bearbeitungen bzw. abhängigen Werken.<br><br>Urheberpersönlichkeitsrechte bleiben grundsätzlich dauerhaft mit dem
+Urheber verbunden und sind nicht übertragbar. Gleichzeitig kann eine
+schöpferische Veränderung eines bestehenden Werkes ein Bearbeitungswerk
+darstellen, dessen Nutzung einer gesonderten vertraglichen Grundlage
+bedarf. In der Praxis bedeutet dies, dass Auftraggeber von Software,
+Designs, Inhalten, Dokumentationen oder Markenauftritten nicht nur die
+Übertragung der wirtschaftlichen Rechte auf den relevanten
+Nutzungsfeldern sichern sollten, sondern auch die Zustimmung zur
+Ausübung abhängiger Rechte sowie geeignete Regelungen zur Nichtausübung
+der Persönlichkeitsrechte gegenüber dem Erwerber.<br><br>Ein sauber strukturierter Vertrag schafft echte Freiheit zur
+Weiterentwicklung des Werkes, zu dessen Anpassung an neue Projekte und
+zur Beauftragung Dritter mit Änderungen. Fehlen solche Klauseln, kann
+die unternehmerische Handlungsfreiheit später erheblich eingeschränkt
+sein. Im Bereich des geistigen Eigentums kommt es daher nicht nur auf
+die Übertragung der Rechte an, sondern vor allem auf eine präzise
+vertragliche Gestaltung.</div>
+      </div>
+    </div>
+    <div class="pub-item" onclick="togglePub(this)">
+      <div class="pub-header">
+        <div class="pub-title"><span data-pl>Dlaczego dobra porada prawna nie obiecuje pewności</span><span data-en>Why Good Legal Advice Does Not Promise Certainty</span><span data-de>Warum gute Rechtsberatung keine Gewissheit verspricht</span></div>
+        <span class="pub-arrow">›</span>
+      </div>
+      <div class="pub-body">
+        <div data-pl>**W prawie liczy się nie obietnica wyniku, lecz rzetelna ocena
+scenariuszy**<br><br>Biznes bardzo często oczekuje od prawników jednoznacznej odpowiedzi: czy
+wygramy spór, czy regulator zaakceptuje dane rozwiązanie, czy kontrola
+przebiegnie bezpiecznie. Problem polega na tym, że rzeczywistość prawna
+rzadko daje podstawy do kategorycznych deklaracji. Profesjonalna ocena
+ryzyka niemal zawsze opiera się na prawdopodobieństwie, zmiennych oraz
+jakości materiału faktycznego.<br><br>To nie jest unikanie odpowiedzi. To przejaw rzetelności. Dobry doradca
+prawny nie powinien składać obietnic co do wyniku postępowania, ponieważ
+każdy spór, projekt transakcyjny czy proces regulacyjny zawiera element
+niepewności. Jednocześnie zbyt uproszczone komunikaty bywają
+niebezpieczne, bo biznes często traktuje je jak gwarancję albo zielone
+światło dla dalszych działań.<br><br>Właśnie dlatego realna wartość doradztwa prawnego nie polega na
+wskazaniu jednego procentu „szans powodzenia", lecz na mapowaniu
+wariantów, identyfikacji czynników ryzyka i pokazaniu, co może zwiększyć
+albo obniżyć prawdopodobieństwo określonego rezultatu. Z punktu widzenia
+klienta to podejście mniej efektowne niż prosta obietnica, ale znacznie
+bardziej użyteczne, uczciwe i bezpieczne.</div>
+        <div data-en>**In law, the key is not a promise of outcome, but a reliable assessment
+of scenarios**<br><br>Businesses often expect lawyers to provide a simple answer: will we win,
+will the regulator approve this, will the audit go smoothly? The
+difficulty is that legal reality rarely justifies categorical certainty.
+Sound legal risk assessment is almost always based on probabilities,
+variables, and the strength of the underlying facts.<br><br>That is not evasiveness. It is professional integrity. A good legal
+adviser should not promise outcomes, because every dispute, transaction,
+or regulatory process involves uncertainty. At the same time, overly
+simplified answers can be dangerous, because stakeholders frequently
+interpret them as guarantees or as a green light for action.<br><br>For that reason, the real value of legal advice lies not in assigning a
+single percentage to "chances of success", but in mapping scenarios,
+identifying risk drivers, and explaining what could shift the balance in
+one direction or another. From the client's perspective, this may sound
+less comforting than a clear promise, but it is far more useful, honest,
+and legally responsible.</div>
+        <div data-de>**Im Recht zählt nicht das Versprechen eines Ergebnisses, sondern die
+belastbare Bewertung von Szenarien**<br><br>Unternehmen erwarten von Rechtsberatern häufig eine klare Aussage:
+Werden wir den Fall gewinnen? Wird die Behörde das Vorhaben genehmigen?
+Wird die Prüfung ohne Probleme verlaufen? Das Problem ist, dass die
+rechtliche Realität nur selten Raum für absolute Gewissheit lässt. Eine
+seriöse rechtliche Risikobewertung beruht fast immer auf
+Wahrscheinlichkeiten, Variablen und der Qualität des zugrunde liegenden
+Sachverhalts.<br><br>Das ist kein Ausweichen, sondern Ausdruck professioneller Redlichkeit.
+Ein guter Rechtsberater sollte keine Ergebnisse versprechen, weil jeder
+Rechtsstreit, jede Transaktion und jedes regulatorische Verfahren mit
+Unsicherheiten verbunden ist. Zugleich sind zu stark vereinfachte
+Aussagen gefährlich, weil sie von Entscheidungsträgern oft als Garantie
+oder als Freigabe für weiteres Handeln verstanden werden.<br><br>Der eigentliche Wert rechtlicher Beratung liegt daher nicht darin, eine
+einzelne Erfolgsquote zu nennen, sondern darin, Szenarien zu
+strukturieren, Risikotreiber zu identifizieren und aufzuzeigen, welche
+Faktoren das Ergebnis beeinflussen können. Für Mandanten klingt das
+mitunter weniger beruhigend als ein eindeutiges Versprechen, ist aber
+deutlich nützlicher, ehrlicher und rechtlich verantwortungsvoller.</div>
+      </div>
+    </div>
+    <div class="pub-item" onclick="togglePub(this)">
+      <div class="pub-header">
+        <div class="pub-title"><span data-pl>Kto może tłumaczyć prawo w internecie</span><span data-en>Who Can Interpret Law Online</span><span data-de>Wer darf Recht im Internet erklären</span></div>
+        <span class="pub-arrow">›</span>
+      </div>
+      <div class="pub-body">
+        <div data-pl>**Granica między otwartym komentarzem a ekspercką poradą będzie coraz
+ważniejsza**<br><br>Nowe chińskie regulacje wymagające od twórców publikujących treści w
+obszarach wysokiego ryzyka posiadania formalnych kwalifikacji pokazują
+szerszy problem, który stopniowo będzie pojawiał się również w innych
+jurysdykcjach. Chodzi o pytanie, kto i na jakich zasadach powinien mieć
+możliwość publicznego objaśniania prawa, finansów, zdrowia czy edukacji
+w przestrzeni cyfrowej.<br><br>Z jednej strony mamy swobodę wypowiedzi i naturalną potrzebę publicznej
+debaty. Z drugiej strony rośnie skala pseudoeksperckich treści, które
+mogą wprowadzać odbiorców w błąd i wpływać na ich decyzje w obszarach
+niosących realne konsekwencje prawne, finansowe lub zdrowotne. W świecie
+algorytmicznej dystrybucji treści ten problem przestaje być marginalny.<br><br>Z perspektywy praktyki prawnej jest to istotne także dla kancelarii i
+profesjonalistów budujących ekspercki wizerunek online. Rosnące
+znaczenie treści cyfrowych oznacza, że wiarygodność, kwalifikacje i
+odpowiedzialność za publikowane materiały będą zyskiwać na znaczeniu.
+Debata o granicy między informacją, komentarzem i poradą prawną dopiero
+się zaczyna, ale jej znaczenie będzie systematycznie rosnąć.</div>
+        <div data-en>**The line between open commentary and expert advice will become
+increasingly important**<br><br>New Chinese regulations requiring creators to hold formal qualifications
+when publishing content in high-risk areas highlight a broader issue
+that is likely to emerge in other jurisdictions as well. The underlying
+question is who should be allowed to explain law, finance, health, or
+education online, and under what conditions.<br><br>On one side lies freedom of expression and the obvious value of public
+debate. On the other, there is the growing volume of pseudo-expert
+content capable of misleading users and influencing decisions in areas
+that carry real legal, financial, or health consequences. In an
+environment shaped by algorithmic distribution, this is no longer a
+marginal concern.<br><br>From the perspective of legal practice, the issue is also highly
+relevant for law firms and professionals building authority online. As
+digital legal content becomes more influential, credibility,
+qualifications, and responsibility for published material will matter
+more and more. The debate over where information ends and regulated
+advice begins is only starting, but it will become increasingly
+significant.</div>
+        <div data-de>**Die Grenze zwischen offenem Kommentar und fachlicher Beratung wird
+immer wichtiger**<br><br>Die neuen chinesischen Vorschriften, wonach Urheber von Inhalten in
+risikobehafteten Bereichen formale Qualifikationen nachweisen müssen,
+verweisen auf ein umfassenderes Problem, das sich voraussichtlich auch
+in anderen Rechtsordnungen stellen wird. Im Kern geht es um die Frage,
+wer rechtliche, finanzielle, gesundheitliche oder bildungsbezogene
+Themen online erläutern darf -- und unter welchen Voraussetzungen.<br><br>Auf der einen Seite steht die Meinungsfreiheit und der legitime Raum
+öffentlicher Debatte. Auf der anderen Seite wächst die Zahl
+pseudo-expertenhafter Inhalte, die Nutzer irreführen und Entscheidungen
+in Bereichen mit erheblichen rechtlichen, finanziellen oder
+gesundheitlichen Folgen beeinflussen können. In einer digitalen
+Öffentlichkeit, die von algorithmischer Verbreitung geprägt ist, ist
+dieses Problem längst nicht mehr randständig.<br><br>Auch aus Sicht der anwaltlichen Praxis ist dies für Kanzleien und
+Experten mit digitaler Präsenz relevant. Je stärker rechtliche Inhalte
+online wirken, desto wichtiger werden Glaubwürdigkeit, Qualifikation und
+Verantwortung für veröffentlichte Aussagen. Die Diskussion darüber, wo
+allgemeine Information endet und regulierte Beratung beginnt, steht erst
+am Anfang, wird aber zunehmend an Bedeutung gewinnen.</div>
+      </div>
+    </div>
+    <div class="pub-item" onclick="togglePub(this)">
+      <div class="pub-header">
+        <div class="pub-title"><span data-pl>Kwalifikowany podpis elektroniczny w mObywatel</span><span data-en>Qualified Electronic Signature in mObywatel</span><span data-de>Qualifizierte elektronische Signatur in mObywatel</span></div>
+        <span class="pub-arrow">›</span>
+      </div>
+      <div class="pub-body">
+        <div data-pl>Nowe możliwości podpisywania umów w pełni cyfrowo<br><br>Udostępnienie kwalifikowanego podpisu elektronicznego w aplikacji
+mObywatel to rozwiązanie o dużym znaczeniu praktycznym. Z punktu
+widzenia obrotu prawnego najważniejsze jest to, że kwalifikowany podpis
+elektroniczny wywołuje co do zasady taki sam skutek jak podpis
+własnoręczny i spełnia wymóg formy pisemnej.<br><br>Ma to szczególne znaczenie w odniesieniu do czynności, dla których forma
+pisemna została zastrzeżona pod rygorem nieważności. W praktyce dotyczy
+to wielu umów funkcjonujących w biznesie, w tym chociażby umów
+przenoszących autorskie prawa majątkowe. Nadal bardzo często spotyka się
+błędne przekonanie, że skan podpisanej umowy, podpis odręczny wklejony
+do PDF albo podpis złożony palcem na ekranie tabletu wystarczają do
+zachowania formy pisemnej. W wielu przypadkach tak nie jest.<br><br>Dlatego rozpowszechnienie kwalifikowanego podpisu w narzędziu
+powszechnie dostępnym dla obywateli może realnie uprościć zawieranie
+umów i ograniczyć ryzyka formalne. Dla przedsiębiorców oznacza to
+szybszy obieg dokumentów, a dla kancelarii -- większą możliwość
+projektowania procesów kontraktowych w pełni cyfrowo, bez rezygnacji z
+bezpieczeństwa prawnego.</div>
+        <div data-en>A new chapter for fully digital contract execution<br><br>The availability of a qualified electronic signature within the
+mObywatel application is a development of major practical importance.
+From a legal standpoint, the key point is that a qualified electronic
+signature generally has the same legal effect as a handwritten signature
+and satisfies the requirement of written form.<br><br>This is particularly important for transactions where written form is
+required under pain of nullity. In business practice, this includes many
+agreements, such as contracts transferring economic copyright. A common
+misconception still persists that a scanned signed document, an image of
+a signature pasted into a PDF, or a signature drawn on a tablet is
+sufficient to meet the written-form requirement. In many cases, it is
+not.<br><br>The wider availability of a qualified signature through a commonly
+accessible public application may therefore significantly simplify
+contract execution and reduce formal risk. For businesses, this means
+faster document circulation. For legal advisers, it opens the door to
+designing genuinely digital contracting processes without sacrificing
+legal validity.</div>
+        <div data-de>**Neue Möglichkeiten für die vollständig digitale Unterzeichnung von
+Verträgen**<br><br>Die Einführung der qualifizierten elektronischen Signatur in der
+mObywatel-App ist von erheblicher praktischer Bedeutung. Rechtlich
+entscheidend ist, dass eine qualifizierte elektronische Signatur
+grundsätzlich dieselbe Wirkung wie eine handschriftliche Unterschrift
+entfaltet und die Anforderungen der Schriftform erfüllt.<br><br>Besonders relevant ist dies für Rechtsgeschäfte, bei denen die
+Schriftform unter Androhung der Nichtigkeit vorgeschrieben ist. In der
+geschäftlichen Praxis betrifft dies zahlreiche Verträge, etwa
+Vereinbarungen über die Übertragung wirtschaftlicher Urheberrechte. Noch
+immer besteht weit verbreitet der Irrtum, ein eingescanntes
+unterschriebenes Dokument, ein in eine PDF-Datei eingefügtes
+Unterschriftsbild oder eine mit dem Finger auf einem Tablet gezeichnete
+Signatur genüge zur Wahrung der Schriftform. In vielen Fällen ist das
+unzutreffend.<br><br>Die breite Verfügbarkeit einer qualifizierten Signatur über eine
+allgemein zugängliche staatliche Anwendung kann daher den
+Vertragsabschluss erheblich vereinfachen und formale Risiken reduzieren.
+Für Unternehmen bedeutet dies schnellere Dokumentenprozesse, für
+Rechtsberater die Möglichkeit, rechtssichere digitale Vertragsabläufe
+ohne Medienbruch zu gestalten.</div>
+      </div>
+    </div>
+    <div class="pub-item" onclick="togglePub(this)">
+      <div class="pub-header">
+        <div class="pub-title"><span data-pl>Kontrakty civil law a common law</span><span data-en>Civil Law vs Common Law Contracts</span><span data-de>Zivilrechtliche und Common-Law-Verträge im Vergleich</span></div>
+        <span class="pub-arrow">›</span>
+      </div>
+      <div class="pub-body">
+        <div data-pl>Dobra umowa to nie tylko treść, ale także architektura dokumentu<br><br>Różnica pomiędzy umowami tworzonymi w tradycji kontynentalnej a
+dokumentami opartymi na modelu anglosaskim nie sprowadza się wyłącznie
+do języka. To dwa odmienne sposoby myślenia o konstrukcji kontraktu. W
+praktyce common law dokument jest zazwyczaj bardziej technicznie
+uporządkowany: ma przewidywalną numerację, spójną hierarchię
+postanowień, czytelne nagłówki i konsekwentne odesłania wewnętrzne.<br><br>W wielu umowach przygotowywanych w systemie kontynentalnym widoczny jest
+z kolei większy wpływ indywidualnego stylu autora niż jednej, spójnej
+logiki redakcyjnej. Skutkiem bywają dokumenty poprawne merytorycznie,
+ale trudniejsze w nawigacji, negocjowaniu i późniejszym stosowaniu. To
+problem praktyczny, a nie wyłącznie estetyczny.<br><br>Dobrze zaprojektowana struktura umowy przyspiesza negocjacje, ogranicza
+pole dla nieporozumień interpretacyjnych i pozwala szybciej przejść do
+istoty biznesowej. W tym sensie jakość kontraktu nie polega wyłącznie na
+trafności klauzul, lecz także na przejrzystości, konsekwencji i
+ergonomii całego dokumentu. W profesjonalnym doradztwie kontraktowym to
+element równie ważny jak sama treść normatywna.</div>
+        <div data-en>**A strong contract is not only about content, but also about
+structure**<br><br>The difference between contracts drafted in the continental tradition
+and those built under the UK or US model is not merely linguistic. It
+reflects two different philosophies of legal drafting. In common law
+practice, contracts are usually more technically engineered: numbering
+is predictable, clause hierarchy is coherent, headings are functional,
+and cross-references are consistent.<br><br>By contrast, many civil law contracts still reflect the personal
+drafting habits of the author more than a unified structural framework.
+The result may be a document that is legally correct, yet harder to
+navigate, negotiate, and apply in practice. That is not simply a
+stylistic issue. It has direct business consequences.<br><br>A well-designed contract structure speeds up negotiations, reduces the
+scope for interpretative confusion, and allows the discussion to move
+more quickly to the commercial substance. In that sense, a high-quality
+agreement is defined not only by the strength of its clauses, but also
+by readability, consistency, and drafting discipline. In professional
+contract advisory work, structure matters as much as substance.</div>
+        <div data-de>**Ein guter Vertrag besteht nicht nur aus Inhalt, sondern auch aus
+Struktur**<br><br>Der Unterschied zwischen Verträgen der kontinentaleuropäischen Tradition
+und solchen nach britisch-amerikanischem Muster ist nicht bloß
+sprachlicher Natur. Er beruht auf zwei unterschiedlichen Ansätzen
+juristischer Vertragsgestaltung. In der Common-Law-Praxis sind Verträge
+in der Regel technischer aufgebaut: Die Nummerierung ist vorhersehbar,
+die Gliederung konsistent, Überschriften erfüllen eine klare Funktion
+und interne Verweise sind einheitlich gestaltet.<br><br>Demgegenüber spiegeln viele zivilrechtlich geprägte Verträge noch immer
+stärker den individuellen Stil des Verfassers als ein einheitliches
+strukturelles Konzept wider. Das Ergebnis kann ein rechtlich
+zutreffendes, aber in Verhandlung, Handhabung und Auslegung deutlich
+weniger praktisches Dokument sein. Dabei handelt es sich nicht nur um
+eine Frage des Stils, sondern um einen handfesten Praxisfaktor.<br><br>Eine gut konzipierte Vertragsstruktur beschleunigt Verhandlungen,
+reduziert Auslegungsunsicherheiten und ermöglicht einen schnelleren
+Fokus auf die wirtschaftliche Substanz. Die Qualität eines Vertrages
+bemisst sich daher nicht nur an der inhaltlichen Präzision seiner
+Klauseln, sondern ebenso an Lesbarkeit, Konsistenz und redaktioneller
+Disziplin. In der professionellen Vertragsberatung ist Struktur genauso
+wichtig wie Inhalt.</div>
+      </div>
+    </div>
+    <div class="pub-item" onclick="togglePub(this)">
+      <div class="pub-header">
+        <div class="pub-title"><span data-pl>ESMA i centralizacja nadzoru nad rynkiem krypto</span><span data-en>ESMA and the Centralisation of Crypto Market Supervision</span><span data-de>ESMA und die Zentralisierung der Kryptomarktaufsicht</span></div>
+        <span class="pub-arrow">›</span>
+      </div>
+      <div class="pub-body">
+        <div data-pl>Czy nadzór nad krypto w UE powinien zostać bardziej scentralizowany?<br><br>Dyskusja o przekazaniu Europejskiemu Urzędowi Nadzoru Giełd i Papierów
+Wartościowych szerszych kompetencji nadzorczych nad rynkiem krypto
+pokazuje jedno z największych napięć w unijnym modelu regulacyjnym. Z
+jednej strony Unia Europejska dąży do harmonizacji zasad poprzez MiCA. Z
+drugiej -- egzekwowanie tych samych reguł pozostaje nadal rozproszone
+pomiędzy krajowe organy nadzoru.<br><br>Taki model rodzi ryzyko nierównej praktyki, arbitrażu regulacyjnego oraz
+niejednolitego podejścia do licencjonowania i egzekwowania obowiązków.
+Dla branży krypto przewidywalność jest tymczasem kluczowa. Rynek
+potrzebuje nie tylko samych przepisów, ale również spójnego standardu
+interpretacyjnego i nadzorczego.<br><br>Z polskiej perspektywy temat ma szczególne znaczenie. Jeżeli krajowy
+nadzór pozostaje ostrożny, pasywny lub opóźniony względem dynamiki
+rynku, większa centralizacja może paradoksalnie zwiększyć pewność prawną
+i ułatwić działalność podmiotom działającym zgodnie z regulacjami. Dla
+przedsiębiorców i inwestorów najważniejsze jest bowiem nie to, który
+organ nadzoruje rynek, lecz czy robi to w sposób przewidywalny,
+profesjonalny i proporcjonalny.</div>
+        <div data-en>Should crypto supervision in the EU become more centralised?<br><br>The debate over granting the European Securities and Markets Authority
+broader supervisory powers over crypto markets highlights one of the key
+tensions within the EU regulatory model. On the one hand, the European
+Union seeks harmonisation through MiCA. On the other, the application
+and enforcement of the same rules remain fragmented across national
+regulators.<br><br>That model creates risks of inconsistent practice, regulatory arbitrage,
+and uneven approaches to licensing and enforcement. For the crypto
+industry, however, predictability is essential. The market needs not
+only a common rulebook, but also a coherent supervisory and
+interpretative standard.<br><br>From a Polish perspective, the issue is particularly relevant. Where
+national supervision is cautious, passive, or slower than the pace of
+the market, greater centralisation may actually increase legal certainty
+and make it easier for compliant businesses to operate. For
+entrepreneurs and investors, the real question is not which authority
+supervises the market, but whether supervision is predictable,
+professional, and proportionate.</div>
+        <div data-de>**Sollte die Aufsicht über den Kryptomarkt in der EU stärker
+zentralisiert werden?**<br><br>Die Diskussion über eine Ausweitung der Aufsichtsbefugnisse der
+Europäischen Wertpapier- und Marktaufsichtsbehörde im Kryptobereich
+verdeutlicht eine der zentralen Spannungen im europäischen
+Regulierungsmodell. Einerseits strebt die Europäische Union mit MiCA
+eine Harmonisierung der Regeln an. Andererseits bleibt deren Anwendung
+und Durchsetzung weiterhin auf nationale Aufsichtsbehörden verteilt.<br><br>Dieses Modell birgt Risiken uneinheitlicher Praxis, regulatorischer
+Arbitrage und divergierender Ansätze bei Zulassung und Durchsetzung. Für
+die Kryptobranche ist Vorhersehbarkeit jedoch zentral. Der Markt
+benötigt nicht nur ein gemeinsames Regelwerk, sondern auch einen
+konsistenten Aufsichts- und Auslegungsstandard.<br><br>Aus polnischer Sicht ist dieses Thema besonders relevant. Wenn die
+nationale Aufsicht vorsichtig, passiv oder langsamer als die
+Marktentwicklung agiert, kann eine stärkere Zentralisierung die
+Rechtssicherheit sogar erhöhen und regelkonform arbeitenden Unternehmen
+den Marktzugang erleichtern. Für Unternehmer und Investoren ist
+letztlich nicht entscheidend, welche Behörde zuständig ist, sondern ob
+die Aufsicht vorhersehbar, professionell und verhältnismäßig erfolgt.</div>
+      </div>
+    </div>
+    <div class="pub-item" onclick="togglePub(this)">
+      <div class="pub-header">
+        <div class="pub-title"><span data-pl>KPI w działach prawnych — co naprawdę warto mierzyć</span><span data-en>KPIs in Legal Departments — What Really Matters</span><span data-de>KPIs in Rechtsabteilungen — Was wirklich zählt</span></div>
+        <span class="pub-arrow">›</span>
+      </div>
+      <div class="pub-body">
+        <div data-pl>**Nie wszystko, co da się policzyć, pokazuje realną wartość pracy
+prawnika**<br><br>W wielu organizacjach próbuje się oceniać funkcję prawną przy użyciu
+wskaźników typowych dla innych działów operacyjnych. Liczba przejrzanych
+umów, czas reakcji czy liczba zamkniętych tematów mogą być przydatne
+organizacyjnie, ale same w sobie nie pokazują jakości doradztwa ani jego
+rzeczywistego wpływu na biznes.<br><br>Dobra praca prawnika bardzo często polega na tym, że do problemu w ogóle
+nie dochodzi. Ryzyko zostaje wychwycone odpowiednio wcześnie, spór nie
+eskaluje, a transakcja zostaje zaprojektowana tak, aby nie generować
+później kosztów i napięć. Tego rodzaju wartości nie da się łatwo
+uchwycić prostym dashboardem.<br><br>Nie oznacza to, że KPI są bezużyteczne. Mają znaczenie tam, gdzie
+pomagają mierzyć alokację zasobów, proporcję pracy reaktywnej do
+proaktywnej, wykorzystanie budżetu czy strukturę wsparcia wewnętrznego i
+zewnętrznego. Trzeba jednak pamiętać, że prawdziwa wartość funkcji
+prawnej ujawnia się przede wszystkim w jakości decyzji, bezpieczeństwie
+procesów i zaufaniu, jakim prawnicy są obdarzani przez biznes.</div>
+        <div data-en>**Not everything that can be measured reflects the real value of legal
+work**<br><br>Many organisations attempt to assess legal functions through indicators
+borrowed from other operational departments. The number of contracts
+reviewed, response times, or the volume of completed matters may be
+useful from a management perspective, but they do not by themselves
+capture the quality of legal advice or its true business impact.<br><br>Much of good legal work consists precisely in preventing problems from
+arising. Risks are identified early, disputes are contained before
+escalation, and transactions are structured in ways that avoid future
+friction and cost. That kind of value is difficult to capture in a
+simple dashboard.<br><br>This does not mean KPIs are useless. They matter where they help measure
+resource allocation, the balance between reactive and proactive work,
+budget use, or the division between internal and external support. What
+should be remembered, however, is that the true value of legal teams is
+reflected above all in the quality of decision-making, the safety of
+business processes, and the degree of trust they build within the
+organisation.</div>
+        <div data-de>**Nicht alles, was sich messen lässt, zeigt den tatsächlichen Wert
+juristischer Arbeit**<br><br>In vielen Organisationen wird versucht, Rechtsabteilungen anhand von
+Kennzahlen zu bewerten, die ursprünglich für andere operative Funktionen
+entwickelt wurden. Die Anzahl geprüfter Verträge, Reaktionszeiten oder
+die Zahl abgeschlossener Vorgänge können organisatorisch hilfreich sein,
+erfassen jedoch für sich genommen weder die Qualität juristischer
+Beratung noch deren tatsächlichen Einfluss auf das Geschäft.<br><br>Gute juristische Arbeit besteht sehr häufig gerade darin, dass Probleme
+gar nicht erst entstehen. Risiken werden frühzeitig erkannt,
+Streitigkeiten vor ihrer Eskalation eingedämmt und Transaktionen so
+strukturiert, dass spätere Kosten und Reibungen vermieden werden. Diese
+Form von Wertschöpfung lässt sich nur schwer in einem simplen Dashboard
+abbilden.<br><br>Das bedeutet nicht, dass KPI nutzlos wären. Sie sind dort sinnvoll, wo
+sie Ressourceneinsatz, das Verhältnis von reaktiver zu proaktiver
+Arbeit, Budgetdisziplin oder die Verteilung zwischen interner und
+externer Beratung sichtbar machen. Gleichwohl zeigt sich der eigentliche
+Wert der Rechtsfunktion vor allem in der Qualität von Entscheidungen,
+der Sicherheit geschäftlicher Prozesse und dem Vertrauen, das sie
+innerhalb der Organisation schafft.</div>
+      </div>
+    </div>
+    <div class="pub-item" onclick="togglePub(this)">
+      <div class="pub-header">
+        <div class="pub-title"><span data-pl>Cyfrowe euro i publiczny blockchain</span><span data-en>Digital Euro and Public Blockchain</span><span data-de>Digitaler Euro und öffentliche Blockchain</span></div>
+        <span class="pub-arrow">›</span>
+      </div>
+      <div class="pub-body">
+        <div data-pl>**Czy przyszłość cyfrowego euro może być bardziej otwarta, niż wcześniej
+zakładano?**<br><br>Debata o cyfrowym euro nabiera nowego wymiaru. Coraz częściej pojawia
+się pytanie nie tylko o to, czy Unia Europejska powinna rozwijać własny
+pieniądz cyfrowy, ale również o to, na jakiej infrastrukturze miałby on
+funkcjonować. Sama możliwość wykorzystania publicznego blockchaina
+stanowi istotną zmianę względem wcześniejszych założeń opartych przede
+wszystkim na modelach zamkniętych.<br><br>Z perspektywy prawnej i regulacyjnej nie jest to wyłącznie kwestia
+technologii. Chodzi również o interoperacyjność, konkurencyjność
+europejskiego rynku płatności, relację wobec stablecoinów denominowanych
+w dolarze oraz o strategiczną pozycję euro w gospodarce cyfrowej. W tym
+sensie architektura cyfrowego euro może stać się elementem szerszej
+polityki gospodarczej i regulacyjnej.<br><br>Dla rynku finansowego, fintechów i podmiotów technologicznych oznacza to
+potrzebę uważnego śledzenia kierunku zmian. Im bardziej otwarta będzie
+infrastruktura przyszłych rozwiązań publicznych, tym większe znaczenie
+zyskają kwestie integracji, zgodności regulacyjnej i projektowania usług
+działających na styku finansów, technologii i prawa.</div>
+        <div data-en>**Could the future of the digital euro be more open than originally
+expected?**<br><br>The debate around the digital euro is entering a new phase. The key
+question is no longer only whether the European Union should develop its
+own digital currency, but also what kind of infrastructure should
+underpin it. The very possibility of relying on a public blockchain
+marks a notable departure from earlier assumptions centred mainly on
+closed systems.<br><br>From a legal and regulatory perspective, this is not merely a
+technological choice. It also concerns interoperability, the
+competitiveness of Europe's payments market, the strategic response to
+dollar-denominated stablecoins, and the long-term position of the euro
+in a digital economy. In that sense, the architecture of the digital
+euro may become part of a broader economic and regulatory strategy.<br><br>For financial institutions, fintech companies, and technology providers,
+this means that the direction of reform should be monitored closely. The
+more open the future infrastructure becomes, the more important will be
+issues of integration, regulatory compliance, and service design at the
+intersection of finance, technology, and law.</div>
+        <div data-de>**Könnte die Zukunft des digitalen Euro offener werden als ursprünglich
+angenommen?**<br><br>Die Debatte um den digitalen Euro tritt in eine neue Phase ein. Im
+Mittelpunkt steht nicht mehr nur die Frage, ob die Europäische Union
+eine eigene digitale Währung entwickeln sollte, sondern auch, auf
+welcher Infrastruktur diese beruhen soll. Schon die Möglichkeit, einen
+öffentlichen Blockchain-Ansatz in Betracht zu ziehen, stellt eine
+deutliche Abkehr von früheren, überwiegend auf geschlossene Systeme
+ausgerichteten Annahmen dar.<br><br>Aus rechtlicher und regulatorischer Sicht handelt es sich dabei nicht
+nur um eine technologische Entscheidung. Ebenso geht es um
+Interoperabilität, die Wettbewerbsfähigkeit des europäischen
+Zahlungsmarktes, die strategische Reaktion auf dollarbasierte
+Stablecoins und um die langfristige Rolle des Euro in einer digitalen
+Wirtschaft. Die technische Architektur des digitalen Euro kann damit
+Teil einer umfassenderen wirtschafts- und regulatorischen Strategie
+werden.<br><br>Für Finanzinstitute, Fintech-Unternehmen und Technologieanbieter
+bedeutet dies, die regulatorische Entwicklung aufmerksam zu verfolgen.
+Je offener die künftige Infrastruktur ausgestaltet wird, desto wichtiger
+werden Fragen der Integration, der Compliance und der Ausgestaltung von
+Dienstleistungen an der Schnittstelle von Finanzen, Technologie und
+Recht.</div>
+      </div>
+    </div>
+    <div class="pub-item" onclick="togglePub(this)">
+      <div class="pub-header">
+        <div class="pub-title"><span data-pl>AI jako narzędzie wpływu i perswazji</span><span data-en>AI as a Tool of Influence and Persuasion</span><span data-de>KI als Instrument der Einflussnahme und Überzeugung</span></div>
+        <span class="pub-arrow">›</span>
+      </div>
+      <div class="pub-body">
+        <div data-pl>**Sztuczna inteligencja nie tylko odpowiada, ale coraz skuteczniej
+przekonuje**<br><br>Rozwój modeli AI pokazuje, że ich rola nie ogranicza się już do
+wyszukiwania informacji czy wspierania redakcji tekstów. Coraz wyraźniej
+widać także ich potencjał perswazyjny. System, który potrafi analizować
+kontekst rozmowy, dopasowywać argumenty do odbiorcy i reagować na jego
+wcześniejsze stanowisko, staje się narzędziem realnego wpływu.<br><br>Z perspektywy praktyki prawnej i negocjacyjnej otwiera to bardzo
+interesujące, ale również wymagające pole zastosowań. Można wyobrazić
+sobie wykorzystanie AI do przygotowywania bardziej trafnych komunikatów
+negocjacyjnych, projektowania strategii ugodowych czy wspierania
+mediacji. Jednocześnie pojawia się pytanie o granicę pomiędzy skuteczną
+argumentacją a niedopuszczalną manipulacją, szczególnie tam, gdzie jedna
+ze stron nie rozumie w pełni mechanizmów oddziaływania.<br><br>To właśnie dlatego wykorzystanie AI w obszarze wpływu, negocjacji i
+rozwiązywania sporów będzie wymagało nie tylko innowacyjności, lecz
+również silnych ram etycznych i prawnych. W kolejnych latach kluczowe
+stanie się nie to, czy AI potrafi przekonywać, ale na jakich zasadach
+powinno to robić.</div>
+        <div data-en>**AI is no longer only answering questions -- it is becoming
+increasingly persuasive**<br><br>The development of advanced AI models shows that their role no longer
+ends with information retrieval or drafting support. Their persuasive
+potential is becoming increasingly clear. A system capable of analysing
+conversational context, adapting arguments to the audience, and
+responding to prior beliefs becomes a tool of genuine influence.<br><br>From the perspective of legal practice and negotiation strategy, this
+opens a highly interesting but also demanding field of application. One
+can easily imagine AI being used to craft more effective negotiation
+messaging, design settlement strategies, or support mediation processes.
+At the same time, it raises difficult questions about the line between
+legitimate persuasion and undue influence, especially where one party
+does not fully understand the mechanisms at work.<br><br>For that reason, the use of AI in influence, negotiation, and dispute
+resolution will require not only innovation, but also robust legal and
+ethical frameworks. In the years ahead, the key question will not be
+whether AI can persuade, but under what rules and safeguards it should
+be allowed to do so.</div>
+        <div data-de>**Künstliche Intelligenz beantwortet nicht nur Fragen -- sie wird
+zunehmend überzeugend**<br><br>Die Entwicklung fortgeschrittener KI-Modelle zeigt, dass ihre Rolle
+längst nicht mehr auf Informationsbeschaffung oder Textunterstützung
+beschränkt ist. Immer deutlicher tritt ihr persuasives Potenzial hervor.
+Ein System, das Gesprächskontexte analysieren, Argumente auf die
+jeweilige Person zuschneiden und auf bestehende Überzeugungen reagieren
+kann, wird zu einem Instrument tatsächlicher Einflussnahme.<br><br>Aus Sicht der anwaltlichen Praxis und der Verhandlungsstrategie eröffnet
+dies ein hochinteressantes, zugleich aber anspruchsvolles
+Anwendungsfeld. Denkbar ist der Einsatz von KI zur Formulierung
+wirkungsvoller Verhandlungsbotschaften, zur Entwicklung von
+Vergleichsstrategien oder zur Unterstützung von Mediationsverfahren.
+Gleichzeitig stellt sich die schwierige Frage nach der Grenze zwischen
+legitimer Überzeugungsarbeit und unzulässiger Einflussnahme,
+insbesondere dann, wenn eine Partei die zugrunde liegenden Mechanismen
+nicht vollständig versteht.<br><br>Gerade deshalb wird der Einsatz von KI in den Bereichen Einfluss,
+Verhandlung und Streitbeilegung nicht nur Innovationsbereitschaft,
+sondern auch belastbare rechtliche und ethische Rahmenbedingungen
+erfordern. Entscheidend wird künftig nicht sein, ob KI überzeugen kann,
+sondern unter welchen Regeln und Sicherungen sie dies tun darf.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-logo">Wąsik Legal · Kancelaria Radcy Prawnego Marcin Wąsik</div>
+  <div class="ft-copy">© 2026 <span data-pl>Wszelkie prawa zastrzeżone</span><span data-en>All rights reserved</span><span data-de>Alle Rechte vorbehalten</span></div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+
+// ── PUBLICATIONS ──
+function togglePub(el) {
+  el.classList.toggle('open');
+}
+// ── MENU ──
+function toggleMenu() {
+  const btn = document.getElementById('burgerBtn');
+  const dd  = document.getElementById('navDropdown');
+  const ov  = document.getElementById('navOverlay');
+  btn.classList.toggle('open');
+  dd.classList.toggle('open');
+  ov.classList.toggle('open');
+}
+function closeMenu() {
+  document.getElementById('burgerBtn').classList.remove('open');
+  document.getElementById('navDropdown').classList.remove('open');
+  document.getElementById('navOverlay').classList.remove('open');
+}
+
+// ── LANGUAGE ──
+function setLang(lang) {
+  document.documentElement.dataset.lang = lang;
+  document.documentElement.lang = lang;
+  document.getElementById('btnPL').classList.toggle('active', lang === 'pl');
+  document.getElementById('btnEN').classList.toggle('active', lang === 'en');
+  document.getElementById('btnDE').classList.toggle('active', lang === 'de');
+}
+
+// ── SCROLL REVEAL ──
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(r => io.observe(r));
+
+// ── FORM ──
+document.getElementById('cf').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const res = await fetch('https://formspree.io/f/xqeywnbe', {
+    method: 'POST',
+    body: new FormData(this),
+    headers: { 'Accept': 'application/json' }
+  });
+  if (res.ok) {
+    this.style.display = 'none';
+    document.getElementById('fok').style.display = 'block';
+  }
+});
+
+// ── MODAL ──
+const SERVICES = {
+  pl:[
+    {num:'01',title:'FinTech i regulacje finansowe',body:'Regulacje sektora finansowego, licencje EMI i VASP, płatności cyfrowe, crypto-assets i MiCA. Wsparcie dla innowacyjnych modeli biznesowych w środowisku regulowanym — od analizy wymogów po wdrożenie struktur zgodności.'},
+    {num:'02',title:'Prawne wsparcie produktowe',body:'Doradztwo prawne na etapie projektowania produktu cyfrowego lub finansowego, weryfikacja modeli biznesowych pod kątem wymogów regulacyjnych, ocena ryzyk wdrożeniowych i przygotowanie dokumentacji produktowej.'},
+    {num:'03',title:'RODO i ochrona danych osobowych',body:'Kompleksowe wdrożenia RODO: audyty zgodności, polityki prywatności, rejestry czynności przetwarzania, umowy powierzenia danych (DPA), szkolenia pracowników oraz bieżące doradztwo w kwestiach prywatności i zarządzania danymi.'},
+    {num:'04',title:'Umowy handlowe i dokumentacja kontraktowa',body:'Przygotowywanie, negocjowanie i opiniowanie umów handlowych wszelkiego rodzaju — kontrakty infrastrukturalne, SLA, umowy ramowe, regulaminy oraz dokumentacja B2B i B2C.'},
+    {num:'05',title:'Monitoring regulacyjny i analiza ryzyk',body:'Śledzenie zmian legislacyjnych i regulacyjnych na poziomie UE i rynków lokalnych, ocena wpływu na działalność klienta, przygotowanie rekomendacji oraz wsparcie we wdrożeniu niezbędnych dostosowań.'},
+    {num:'06',title:'Compliance korporacyjny i regulacyjny',body:'Projektowanie i wdrażanie systemów compliance, polityki i procedury AML, zarządzanie ryzykiem regulacyjnym, obsługa relacji z regulatorami oraz reprezentacja w toku postępowań przed organami nadzoru.'},
+    {num:'07',title:'Doradztwo transgraniczne',body:'Obsługa prawna operacji prowadzonych w wielu jurysdykcjach (PL, EE, LV, LT, BE, LU, UK, US), koordynacja zewnętrznych doradców, strukturyzowanie działalności transgranicznej i wsparcie ekspansji zagranicznej.'},
+    {num:'08',title:'Bieżące wsparcie prawne biznesu',body:'Stała obsługa prawna spółek i przedsiębiorców — opinie prawne, przygotowywanie i analiza umów, korespondencja prawna, wsparcie operacyjne i szybkie odpowiedzi na bieżące potrzeby prawne biznesu.'},
+    {num:'09',title:'Wsparcie relacji biznesowych',body:'Doradztwo w relacjach z inwestorami, regulatorami i partnerami biznesowymi. Negocjacje umów, zarządzanie interesariuszami i budowanie struktur współpracy.'},
+    {num:'10',title:'Ład korporacyjny',body:'Organizacja i obsługa organów spółek, przygotowywanie umów wspólników i akcjonariuszy, zmiany struktury kapitałowej, zakładanie i likwidacja podmiotów oraz corporate housekeeping.'}
+  ],
+  en:[
+    {num:'01',title:'FinTech and Financial Services Regulation',body:'Financial sector regulation, EMI and VASP licensing, digital payments, crypto-assets and MiCA. Legal support for innovative business models in regulated environments.'},
+    {num:'02',title:'Product Legal Support',body:'Legal advisory at the product design stage, business model review against regulatory requirements, implementation risk assessment and preparation of product documentation.'},
+    {num:'03',title:'GDPR Implementation and Data Protection',body:'Comprehensive GDPR implementation: compliance audits, privacy policies, processing registers, DPA agreements, staff training and day-to-day data governance advisory.'},
+    {num:'04',title:'Commercial Contracts and Customer Documentation',body:'Drafting, negotiating and reviewing all types of commercial agreements — infrastructure contracts, SLAs, framework agreements, terms of service and B2B/B2C documentation.'},
+    {num:'05',title:'Regulatory Monitoring and Legal Risk Analysis',body:'Tracking legislative and regulatory developments at EU and local market level, impact assessment, recommendations and support in implementing necessary adjustments.'},
+    {num:'06',title:'Corporate and Regulatory Compliance',body:'Designing and implementing compliance systems, AML policies and procedures, regulatory risk management and managing regulator relations.'},
+    {num:'07',title:'Cross-border Legal Advisory',body:'Legal support for operations across multiple jurisdictions (PL, EE, LV, LT, BE, LU, UK, US), coordination of external advisors and international expansion support.'},
+    {num:'08',title:'Legal Support for Day-to-Day Business',body:'Ongoing legal support for companies and entrepreneurs — legal opinions, contracts, correspondence and prompt responses to day-to-day legal needs.'},
+    {num:'09',title:'Stakeholder Management and Business Partnering',body:'Advisory on relations with investors, regulators and business partners. Negotiations, stakeholder management and cooperation structure design.'},
+    {num:'10',title:'Corporate Governance',body:'Organising and supporting company bodies, shareholders agreements, capital structure changes, incorporation and liquidation, and corporate housekeeping.'}
+  ],
+  de:[
+    {num:'01',title:'FinTech und Finanzmarktregulierung',body:'Rechtsberatung für FinTech-Unternehmen, einschließlich regulatorischer Analyse von Geschäftsmodellen, Unterstützung bei Lizenzierungsverfahren und laufender Compliance-Beratung im Bereich der Finanzmarktregulierung. Begleitung bei Behördenkontakten und Anpassung der Geschäftstätigkeit an das sich wandelnde regulatorische Umfeld.'},
+    {num:'02',title:'Rechtliche Produktunterstützung',body:'Unterstützung von Geschäfts- und Technologieteams in allen Phasen der Entwicklung und Einführung digitaler Produkte und Dienstleistungen. Analyse von Produktmodellen auf rechtliche Konformität, Erstellung von Produktdokumentation und Identifizierung rechtlicher Risiken.'},
+    {num:'03',title:'DSGVO und Datenschutz',body:'Umfassende Beratung zur Einhaltung der Datenschutzvorschriften, einschließlich der Implementierung von DSGVO-Richtlinien und -Verfahren, Compliance-Audits sowie Unterstützung beim Management von Datenschutzverletzungen. Erstellung von Datenverarbeitungsdokumentationen und Begleitung bei Behördenkontakten.'},
+    {num:'04',title:'Handelsverträge und Vertragsdokumentation',body:'Ausarbeitung, Verhandlung und Prüfung von Handelsverträgen, einschließlich Technologie-, Lizenz- und Kooperationsverträgen. Erstellung klarer und kohärenter Vertragsdokumentation für Unternehmen im internationalen Umfeld.'},
+    {num:'05',title:'Regulatorisches Monitoring und Risikoanalyse',body:'Kontinuierliche Beobachtung gesetzlicher und regulatorischer Änderungen und ihrer Auswirkungen auf die Unternehmenstätigkeit. Identifizierung regulatorischer Risiken und Erarbeitung von Empfehlungen zur Anpassung der Geschäftstätigkeit an neue Anforderungen.'},
+    {num:'06',title:'Korporative und regulatorische Compliance',body:'Entwicklung und Implementierung von Compliance-Systemen zur Sicherstellung der Übereinstimmung mit geltenden Vorschriften und Marktstandards. Ausarbeitung interner Verfahren, Compliance-Richtlinien und Unterstützung beim Aufbau einer compliance-orientierten Unternehmenskultur.'},
+    {num:'07',title:'Grenzüberschreitende Rechtsberatung',body:'Rechtliche Unterstützung bei internationalen Projekten, insbesondere im Bereich der Unternehmensstrukturierung, Vertragsverhandlungen und Koordination der Rechtsberatung in verschiedenen Rechtssystemen. Erfahrung in der Zusammenarbeit mit ausländischen Kanzleien und Rechtsteams.'},
+    {num:'08',title:'Laufende rechtliche Unternehmensberatung',body:'Kontinuierliche Rechtsberatung für Unternehmen, einschließlich der Analyse aktueller Rechtsfragen, Erstellung von Gutachten und Unterstützung bei unternehmerischen Entscheidungen. Integration der Rechtsfunktion in die operativen Prozesse des Unternehmens.'},
+    {num:'09',title:'Unterstützung von Geschäftsbeziehungen',body:'Rechtliche Unterstützung beim Aufbau und der Pflege von Beziehungen zu Geschäftspartnern, Investoren und wichtigen Vertragspartnern. Teilnahme an Handelsverhandlungen und Schaffung rechtlicher Rahmenbedingungen für eine langfristige Zusammenarbeit.'},
+    {num:'10',title:'Corporate Governance',body:'Beratung zur Funktionsweise von Gesellschaftsorganen, Erstellung von Unternehmensunterlagen und Unterstützung bei der Gestaltung transparenter Grundsätze der Unternehmensführung. Unterstützung bei Entscheidungsprozessen von Vorständen und Aufsichtsräten.'}
+  ]
+};
+function openModal(i) {
+  const lang = document.documentElement.dataset.lang || 'pl';
+  const d = (SERVICES[lang] || SERVICES['pl'])[i];
+  document.getElementById('modalNum').textContent = d.num;
+  document.getElementById('modalTitle').textContent = d.title;
+  document.getElementById('modalBody').textContent = d.body;
+  document.getElementById('modalBg').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(e) {
+  if (e && e.type === 'click' && e.currentTarget === document.getElementById('modalBg') && e.target !== e.currentTarget) return;
+  document.getElementById('modalBg').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ── SCROLL TO SERVICE ──
+function scrollToService(n) {
+  const el = document.getElementById('srv-' + n);
+  if (!el) return;
+  el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  setTimeout(() => { el.classList.add('highlight'); setTimeout(() => el.classList.remove('highlight'), 1800); }, 600);
+}
+</script>
+</body>
+</html>
