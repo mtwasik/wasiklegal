@@ -923,7 +923,7 @@ footer {
 <!-- MODAL -->
 <div class="modal-bg" id="modalBg" onclick="closeModal(event)">
   <div class="modal">
-    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <button class="modal-close" onclick="document.getElementById('modalBg').classList.remove('open');document.body.style.overflow=''">&times;</button>
     <div class="modal-num" id="modalNum"></div>
     <div class="modal-title" id="modalTitle"></div>
     <div class="modal-body" id="modalBody"></div>
@@ -1808,9 +1808,13 @@ function openModal(i) {
   document.getElementById('modalTitle').textContent = d.title;
   document.getElementById('modalBody').textContent = d.body;
   document.getElementById('modalBg').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(e) {
+  if (e && e.target !== document.getElementById('modalBg')) return;
+  document.getElementById('modalBg').classList.remove('open');
   document.body.style.overflow = '';
 }
-
 // ── SCROLL TO SERVICE ──
 function scrollToService(n) {
   const el = document.getElementById('srv-' + n);
