@@ -1648,18 +1648,41 @@ const io = new IntersectionObserver(entries => {
 document.querySelectorAll('.reveal').forEach(r => io.observe(r));
 
 // ── FORM ──
-document.getElementById('cf').addEventListener('submit', async function(e) {
-  e.preventDefault();
-  const res = await fetch('https://formspree.io/f/xqeywnbe', {
-    method: 'POST',
-    body: new FormData(this),
-    headers: { 'Accept': 'application/json' }
+<script>
+document.querySelectorAll('form[action*="formspree"]').forEach(form => {
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const okBox = document.getElementById('fok');
+    const btn = form.querySelector('.btn-send');
+
+    btn.disabled = true;
+
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (res.ok) {
+        form.reset();
+        form.style.display = 'none';
+        if (okBox) okBox.style.display = 'block';
+      } else {
+        alert("Nie udało się wysłać wiadomości. Spróbuj ponownie.");
+      }
+
+    } catch (error) {
+      alert("Błąd połączenia. Spróbuj ponownie.");
+    }
+
+    btn.disabled = false;
   });
-  if (res.ok) {
-    this.style.display = 'none';
-    document.getElementById('fok').style.display = 'block';
-  }
+
 });
+</script>
 
 // ── MODAL ──
 const SERVICES = {
