@@ -1657,14 +1657,31 @@ document.querySelectorAll('.reveal').forEach(r => io.observe(r));
 // ── FORM ──
 document.getElementById('cf').addEventListener('submit', async function(e) {
   e.preventDefault();
-  const res = await fetch('https://formspree.io/f/xqeywnbe', {
-    method: 'POST',
-    body: new FormData(this),
-    headers: { 'Accept': 'application/json' }
-  });
-  if (res.ok) {
-    this.style.display = 'none';
-    document.getElementById('fok').style.display = 'block';
+
+  const form = this;
+  const okBox = document.getElementById('fok');
+  const errBox = document.getElementById('ferr');
+
+  okBox.style.display = 'none';
+  errBox.style.display = 'none';
+
+  try {
+    const res = await fetch('https://formspree.io/f/xqeywnbe', {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (res.ok) {
+      form.style.display = 'none';
+      okBox.style.display = 'block';
+    } else {
+      errBox.style.display = 'block';
+      alert('Błąd Formspree: ' + res.status);
+    }
+  } catch (error) {
+    errBox.style.display = 'block';
+    alert('Błąd połączenia');
   }
 });
 
